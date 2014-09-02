@@ -38,7 +38,7 @@ be run in order:
 
 ## Information
 
-_Author(s)_: Seung Joong Kim, Riccardo Pellarin, Peter Cimermancic3
+_Author(s)_: Seung Joong Kim, Riccardo Pellarin, Peter Cimermancic
 
 _Date_: September 2nd, 2014
 
