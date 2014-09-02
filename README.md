@@ -1,16 +1,16 @@
-# Nup133
+# SEA Complex (UNDER CONSTRUCTION)
 
 These scripts demonstrate the use of [IMP](http://salilab.org/imp),
-[MODELLER](http://salilab.org/modeller/),
-[FoXS](http://salilab.org/foxs/), and
+[PMI](https://github.com/salilab/pmi),
+[FoXS](http://salilab.org/foxs), and
 [Minimal Ensemble Search](http://bl1231.als.lbl.gov/saxs_protocols/mes.php) in the modeling of the
-Nup133 in the Nuclear Pore Complex (NPC). First, MODELLER is used to generate
+SEA complex. First, MODELLER is used to generate
 structures for the individual components in the Nup133. Then, IMP
 is used to fit these components together into the electron microscopy density
 map of Nup133.
 
 A full description of the scripts can be found in
-[Integrative structure-function mapping of the nucleoporin Nup133 suggests a conserved mechanism for membrane anchoring of the nuclear pore complex](http://mcponline.org/content/early/2014/08/19/mcp.M114.040915).
+[Molecular architecture and function of the SEA complex, a modulator of the TORC1 pathway](http://mcponline.org/content/early/2014/07/29/mcp.M114.039388).
 
 ## Steps (UNDER CONSTRUCTION)
 
@@ -38,7 +38,7 @@ be run in order:
 
 ## Information
 
-_Author(s)_: Seung Joong Kim
+_Author(s)_: Seung Joong Kim, Riccardo Pellarin, Peter Cimermancic3
 
 _Date_: September 2nd, 2014
 
@@ -55,4 +55,4 @@ _Testable_: Yes.
 _Parallelizeable_: No
 
 _Publications_:
- - Seung Joong Kim*, Javier Fernandez-Martinez*, Parthasarathy Sampathkumar*, Anne Martel, Tsutomu Matsui, Hiro Tsuruta, Thomas Weiss, Yi Shi, Ane Markina-Inarrairaegui, Jeffery B. Bonanno, J. Michael Sauder, Stephen K. Burley, Brian T. Chait, Steven C. Almo, Michael P. Rout, and Andrej Sali, [Integrative structure-function mapping of the nucleoporin Nup133 suggests a conserved mechanism for membrane anchoring of the nuclear pore complex](http://mcponline.org/content/early/2014/08/19/mcp.M114.040915), Molecular & Cellular Proteomics, 2014, mcp.M114.040915.
+ - Romain Algret, Javier Fernandez-Martinez, Yi Shi, Seung Joong Kim, Riccardo Pellarin, Peter Cimermancic, Emilie Cochet, Andrej Sali, Brian T. Chait, Michael P. Rout, and Svetlana Dokudovskaya, [Molecular architecture and function of the SEA complex, a modulator of the TORC1 pathway](http://mcponline.org/content/early/2014/07/29/mcp.M114.039388), Molecular & Cellular Proteomics, 2014, mcp.M114.039388.
