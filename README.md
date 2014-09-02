@@ -1,9 +1,7 @@
 # SEA Complex (UNDER CONSTRUCTION)
 
 These scripts demonstrate the use of [IMP](http://salilab.org/imp),
-[PMI](https://github.com/salilab/pmi),
-[FoXS](http://salilab.org/foxs), and
-[Minimal Ensemble Search](http://bl1231.als.lbl.gov/saxs_protocols/mes.php) in the modeling of the
+[PMI](https://github.com/salilab/pmi) in the modeling of the
 SEA complex. First, MODELLER is used to generate
 structures for the individual components in the Nup133. Then, IMP
 is used to fit these components together into the electron microscopy density
