@@ -1,0 +1,9 @@
+ _aln.pos         10        20        30        40        50        60
+3tw8A     ANPDRTFDLVLKV-KCEDPVVLWKF----PEDFGDQ-------------------------------- 
+Npr3      --ELRNSSLNDTPG--QSPHHYHHRYHHYHKNAA--TSQRNSHTQYDVEEEDMEVSAMLQDGKISMNE 
+ _consrvd     *   *         *
+
+ _aln.p   70        80        90       100       110       120       130
+3tw8A     ----------------EILQSVPKFCFPFDV-ERVSQNQVGQHFTFVLTDIESKQRFGFCRLTSG 
+Npr3      IFFEEENFQDINKILEFDNDFVAEFCSPER-E--------MCNTRFEFTVD-NFCFLGLPIHVDS 
+ _consrvd                      *  ** *                 *  *        *

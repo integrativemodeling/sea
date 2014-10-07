@@ -1,0 +1,9 @@
+ _aln.pos         10        20        30        40        50        60
+2eclA     TCAICRVQVMDACLRCQAENKQE------------------------------------DCVVVWGEC 
+SEA4      CCPHCGSSF-PRCAICLMPLGTSNLPFVINGTQSRDPMQTEDSQDGANRELVSRKLKLNEWFSFCLSC 
+ _consrvd  *  *       *  *                                                   *
+
+ _aln.p   70        80        90
+2eclA     NHSFHNCCMSLWVKQNNRCPL--C 
+SEA4      NHGMHAGHAEEWFDRHNVCPTPGC 
+ _consrvd **  *      *    * **   *

@@ -1,0 +1,14 @@
+ _aln.pos         10        20        30        40        50        60
+2pm7A     SGNIEQTISKNLVSGNIKSAVKNSLEND-----LMMEAMVIALD----SNNERLKESVKNAYFAKYGS 
+SEA4      NGHYEKAAAWAVFFGDIPKAVEILGSAKKERLRLIATAIAGYLAYKDLPGNNAW-RQQCRKMSSELDD 
+ _consrvd  *  *         * *  **            *   *    *       *
+
+ _aln.p   70        80        90       100       110       120       130
+2pm7A     KSSLSRILYSISK-REVDDLVENLDVSQWKFISKAIQNLYPNDIAQRNEMMIKLGDRMKENG------ 
+SEA4      --PYLRVIFAFIADNDWWDILYEPAI-SLRERLGVALRFLNDT--DLTTFLDRTSSTVIENGELEGLI 
+ _consrvd      *            *                                        ***
+
+ _aln.pos  140       150       160       170       180
+2pm7A     --------------------HRQDSLTLYLAAGS---LDKVASIWLS 
+SEA4      LTGITPNGIDLLQSYVNKTSDVQSAALISIFGSPRYFRDQRVDEWIQ 
+ _consrvd                       *               *     *

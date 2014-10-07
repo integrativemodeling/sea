@@ -1,0 +1,9 @@
+ _aln.pos         10        20        30        40        50        60
+2ebmA     QRNELEALESIYP-DSFTVLSENPPSFTITVTSEAGEN--DETVQTTLKFTYSEKYPD--EAPLYEIF 
+SEA3      LGEEVSAIGHKFPKVVFEKISVSTRELCLTLNGPWSEENPDDYIFLRISINFPLNYPNKGDPPKFTIE 
+ _consrvd    *  *     *   *   *        *      *   *              **     *   *
+
+ _aln.p   70        80        90       100
+2ebmA     SQENLEDNDVSDILKLLALQAEEN--LGMVMIFTLVTAV 
+SEA3      ENSNLTMSKRQEILSNLATIGQKYTDSNLYCLEPCIRFV 
+ _consrvd    **       **  **                    *
