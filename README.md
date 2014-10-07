@@ -29,22 +29,19 @@ A full description of the scripts can be found in
 - `stat.n.out`	 log files. They contain all relevant numbers of the calculation.
 
 ## Running the SEA complex script:
-with 3 crystal interfaces:
+with 1:3 stoichiometry and symmetry:
 -
 -
 -
 
-with no crystal interfaces:
--
--
--
+
 
 
 ## Information
 
 _Author(s)_: Seung Joong Kim, Riccardo Pellarin, and Peter Cimermancic
 
-_Date_: September 2nd, 2014
+_Date_: October 6th, 2014
 
 _License_: [LGPL](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
 This library is free software; you can redistribute it and/or
