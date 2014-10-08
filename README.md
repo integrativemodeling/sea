@@ -62,7 +62,7 @@ A full description of the scripts can be found in
 - `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final3.py` : SEA4 942-1032
 
 
-## Running the SEA complex script:
+## Running the IMP/PMI scripts for the SEA complex:
 with 1:3 stoichiometry and rotational symmetry:
 -
 -
