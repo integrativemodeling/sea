@@ -7,6 +7,7 @@ First, [MODELLER](http://salilab.org/modeller) is used to generate
 initial structures for the individual components where reliable templates are available. Then, IMP
 is used to model these components using the DSS/EDC crosslinks and the affinity purification data for the entire SEA complex.
 
+The scripts work with the 65734ec version (develop branch) of [IMP](http://salilab.org/imp) and the 47dafcc version (develop branch) of [PMI](https://github.com/salilab/pmi).
 
 A full description of the scripts can be found in
 [Molecular architecture and function of the SEA complex, a modulator of the TORC1 pathway](http://mcponline.org/content/early/2014/07/29/mcp.M114.039388).
@@ -19,6 +20,18 @@ A full description of the scripts can be found in
   - `sj_SEA_multi_layers.py`                   The main modeling script with 1:3 stoichiometry and rotational symmetry
 
   - `chimera_scripts/sea_density.cmd`          Chimera script to view all localization density files 
+  
+  - `MODELLER/Npr2` MODELLER scripts to generate comparative models of Npr2
+
+  - `MODELLER/Npr3` MODELLER scripts to generate comparative models of Npr3
+
+  - `MODELLER/SEA1` MODELLER scripts to generate comparative models of SEA1
+
+  - `MODELLER/SEA2` MODELLER scripts to generate comparative models of SEA2
+
+  - `MODELLER/SEA3` MODELLER scripts to generate comparative models of SEA3
+  
+  - `MODELLER/SEA4` MODELLER scripts to generate comparative models of SEA4
 
 
 - `outputs/pdbs`    the production will write the best scoring models into pdb files they are initialized and then updated as long as the calculation goes
@@ -27,6 +40,28 @@ A full description of the scripts can be found in
 - `outputs/rmfs`    the production will write the rmf3 files for lowest temperature replica.
 			
 - `stat.n.out`	 log files. They contain all relevant numbers of the calculation.
+
+## Running the MODELLER scripts:
+- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final1.py` : Npr2 9-127
+- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final2.py` : Npr2 257-327
+- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final3.py` : Npr2 563-610
+- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final1.py` : Npr3 322-438
+- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final2.py` : Npr3 531-577
+- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final3.py` : Npr3 1-31
+- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final4.py` : Npr3 950-988
+- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final5.py` : Npr3 1083-1140
+- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final1.py` : SEA1 101-275
+- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final2.py` : SEA1 279-473
+- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final3.py` : SEA1 1178-1273
+- `mod9.12 scripts/MODELLER/SEA2/all_sjkim_final1.py` : SEA2 127-520
+- `mod9.12 scripts/MODELLER/SEA2/all_sjkim_final2.py` : SEA2 1280-1341
+- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final1.py` : SEA3 54-424
+- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final2.py` : SEA3 430-536
+- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final3.py` : SEA3 1092-1139
+- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final1.py` : SEA4 45-426
+- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final2.py` : SEA4 659-835
+- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final3.py` : SEA4 942-1032
+
 
 ## Running the SEA complex script:
 with 1:3 stoichiometry and rotational symmetry:
