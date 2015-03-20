@@ -1,5 +1,3 @@
-# SEA Complex
-
 These scripts demonstrate the use of [IMP](http://salilab.org/imp), [MODELLER](http://salilab.org/modeller), 
 [PMI](https://github.com/salilab/pmi) in the modeling of the SEA complex using 188 DSS chemical cross-links and 23 affinity purification data.
 
