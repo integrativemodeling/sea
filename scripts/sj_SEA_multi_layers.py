@@ -99,7 +99,7 @@ print inputs
 # for bead representations
 #####################################################
 m = IMP.Model()
-simo = representation.SimplifiedModel(m,upperharmonic=True,disorderedlength=True)
+simo = representation.Representation(m,upperharmonic=True,disorderedlength=True)
 res_cry = float(inputs.res_cry)
 res_hom = float(inputs.res_hom)
 res_ev = float(inputs.res_ev)
@@ -128,7 +128,7 @@ print "resolutions for the crystal structures = ", res2
 
 # SEA1
 tmp_color=0.5
-simo.add_component_name("SEA1")
+simo.create_component("SEA1")
 ds=[(1,50),(51,100)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
 simo.add_component_pdb("SEA1", '../pdb/SEA1_101-275.pdb', "A", resolutions=res, color=tmp_color)
 ds=[(276,278)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
@@ -149,7 +149,7 @@ simo.setup_component_sequence_connectivity("SEA1", res_cry)
 
 # SEA2
 tmp_color=0.7
-simo.add_component_name("SEA2")
+simo.create_component("SEA2")
 ds=[(1,63),(64,126)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
 simo.add_component_pdb("SEA2",'../pdb/SEA2_127-520.pdb', "A", resolutions=res, color=tmp_color, resrange=(127,172))
 ds=[(173,200)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
@@ -168,7 +168,7 @@ simo.setup_component_sequence_connectivity("SEA2", res_cry)
 
 # SEA3
 tmp_color=0.0
-simo.add_component_name("SEA3")
+simo.create_component("SEA3")
 ds=[(1,53)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
 simo.add_component_pdb("SEA3",'../pdb/SEA3_54-424.pdb', "A", resolutions=res, color=tmp_color, resrange=(54,278))
 ds=[(279,289)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
@@ -196,7 +196,7 @@ if (inputs.ncopy == "3"):
 else:
     cnames=["SEA4"]
 for cname in cnames:
-    simo.add_component_name(cname)
+    simo.create_component(cname)
     ds=[(1,44)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     simo.add_component_pdb(cname,'../pdb/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(45,87))
     ds=[(88,123)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
@@ -225,7 +225,7 @@ for cname in cnames:
 
 # Npr2
 tmp_color=0.8
-simo.add_component_name("Npr2")
+simo.create_component("Npr2")
 ds=[(1,8)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
 simo.add_component_pdb("Npr2",'../pdb/Npr2_9-127.pdb', "A", resolutions=res, color=tmp_color)
 ds=[(128,192),(193,256)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
@@ -241,7 +241,7 @@ simo.setup_component_sequence_connectivity("Npr2", res_cry)
 
 # Npr3
 tmp_color=0.87
-simo.add_component_name("Npr3")
+simo.create_component("Npr3")
 simo.add_component_pdb("Npr3",'../pdb/Npr3_1-31.pdb', "A", resolutions=res, color=tmp_color)
 ds=[(32,128),(129,225),(226,321)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
 simo.add_component_pdb("Npr3",'../pdb/Npr3_322-438.pdb', "A", resolutions=res, color=tmp_color, resrange=(322,351))
@@ -265,7 +265,7 @@ if (inputs.ncopy == "3"):
 else:
     cnames=["Seh1"]
 for cname in cnames:
-    simo.add_component_name(cname)
+    simo.create_component(cname)
     simo.add_component_pdb(cname,'../pdb/3F3F.pdb', "A", resolutions=res2, color=tmp_color, resrange=(1,248))
     ds=[(249,287)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     simo.add_component_pdb(cname,'../pdb/3F3F.pdb', "A", resolutions=res2, color=tmp_color, resrange=(288,346))
@@ -277,7 +277,7 @@ for cname in cnames:
 
 # Sec13; Residues (1), (159-165), (297) are missing in PDB
 tmp_color=0.3
-simo.add_component_name("Sec13")
+simo.create_component("Sec13")
 ds=[(1,1)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
 simo.add_component_pdb("Sec13",'../pdb/2PM7.pdb', "D", resolutions=res2, color=tmp_color, resrange=(2,158))
 ds=[(159,165)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
