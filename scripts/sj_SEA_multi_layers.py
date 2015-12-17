@@ -33,26 +33,24 @@ partialscore2 = []
 import optparse
 
 parser = optparse.OptionParser(description='Performing the INITIAL/REFINEMENT Monte Carlo job, with crosslinks and selected/ALL domain mapping data. Example of usage: setup_environment.sh python ./sj_SEA_XLDM.py -f models_1877.rmf -n 0')
-parser.add_option('--copy', action="store", dest="ncopy", help="copy numbers (stoichiometry) for SEA4 and Seh1" )
+parser.add_option('--copy', action="store", dest="ncopy", help="copy numbers (stoichiometry) for SEA4 and Seh1", type="int", default=3)
 parser.add_option('--sym', action="store", dest="symmetry", help="symmetry option for SEA4 and Seh1" )
 parser.add_option('-f', action="store", dest="rmf_input", help="rmf file name to continue" )
-parser.add_option('-n', action="store", dest="frame_number", help="frame number to continue" )
-parser.add_option('-r', action="store", dest="nrepeats", help="number of Monte Carlo cycles" )
+parser.add_option('-n', action="store", dest="frame_number", help="frame number to continue", type="int", default=1)
+parser.add_option('-r', action="store", dest="nrepeats", help="number of Monte Carlo cycles", type="int", default=5)
 parser.add_option('-x', action="store", dest="XL_input", help="Cross-links file name to read" )
-parser.add_option('-o', action="store", dest="rmf_output", help="rmf file name for output" )
-parser.add_option('-s', action="store", dest="stat_output", help="stat file name for output" )
+parser.add_option('-o', action="store", dest="rmf_output", help="rmf file name for output", type="string", default="models.rmf")
+parser.add_option('-s', action="store", dest="stat_output", help="stat file name for output", type="string", default="stat.dat")
 parser.add_option('--REFINE', action="store", dest="refinement", help="refinement True or False" )
-parser.add_option('-w', action="store", dest="weight", help="weight for domain mapping data" )
-parser.add_option('--res_cry', action="store", dest="res_cry", help="resolution of the crystal structures" )
-parser.add_option('--res_hom', action="store", dest="res_hom", help="resolution of the comparative (homology) models" )
-parser.add_option('--res_ev', action="store", dest="res_ev", help="resolution of the excluded volume restraints" )
-parser.add_option('--res_compo', action="store", dest="res_compo", help="resolution of the composite restraints" )
+parser.add_option('-w', action="store", dest="weight", help="weight for domain mapping data", type="float", default=1.0 )
+parser.add_option('--res_cry', action="store", dest="res_cry", help="resolution of the crystal structures", type="float", default=1.0)
+parser.add_option('--res_hom', action="store", dest="res_hom", help="resolution of the comparative (homology) models", type="float", default=5.0)
+parser.add_option('--res_ev', action="store", dest="res_ev", help="resolution of the excluded volume restraints", type="float", default=5.0)
+parser.add_option('--res_compo', action="store", dest="res_compo", help="resolution of the composite restraints", type="float", default=100.0)
 parser.add_option('--draw_hierarchy', action="store", dest="draw_hierarchy", help="draw hierarchy" )
 inputs, args = parser.parse_args()
 
 # Setting up the input parameters
-if inputs.ncopy==None:
-    inputs.ncopy = "3"
 if (inputs.symmetry=="True") or (inputs.symmetry=="true") or (inputs.symmetry=="Yes") or (inputs.symmetry=="yes") :
     inputs.symmetry = True
 else:
@@ -65,28 +63,10 @@ if inputs.XL_input==None:
 else:
     f=open(inputs.XL_input,"r")
     f.close()
-if inputs.frame_number==None:
-    inputs.frame_number = 1
-if inputs.nrepeats==None:
-    inputs.nrepeats = 5
-if inputs.rmf_output==None:
-    inputs.rmf_output = "models.rmf"
-if inputs.stat_output==None:
-    inputs.stat_output = "stat.dat"
 if (inputs.refinement=="True") or (inputs.refinement=="true") or (inputs.refinement=="Yes") or (inputs.refinement=="yes") :
     inputs.refinement = True
 else:
     inputs.refinement = False
-if inputs.weight==None:
-    inputs.weight = 1.0
-if inputs.res_cry==None:
-    inputs.res_cry = 1.0
-if inputs.res_hom==None:
-    inputs.res_hom = 5.0
-if inputs.res_ev==None:
-    inputs.res_ev = 5.0
-if inputs.res_compo==None:
-    inputs.res_compo = 100.0
 if (inputs.draw_hierarchy=="True") or (inputs.draw_hierarchy=="true") or (inputs.draw_hierarchy=="Yes") or (inputs.draw_hierarchy=="yes") :
     inputs.draw_hierarchy = True
 else:
@@ -100,10 +80,10 @@ print inputs
 #####################################################
 m = IMP.Model()
 simo = representation.Representation(m,upperharmonic=True,disorderedlength=True)
-res_cry = float(inputs.res_cry)
-res_hom = float(inputs.res_hom)
-res_ev = float(inputs.res_ev)
-res_compo = float(inputs.res_compo)
+res_cry = inputs.res_cry
+res_hom = inputs.res_hom
+res_ev = inputs.res_ev
+res_compo = inputs.res_compo
 res = []
 res2 = [] 
 
@@ -191,7 +171,7 @@ simo.setup_component_sequence_connectivity("SEA3", res_cry)
 # SEA4
 tmp_color=1.0
 cnames={}
-if (inputs.ncopy == "3"):
+if inputs.ncopy == 3:
     cnames=["SEA4.1", "SEA4.2", "SEA4.3"]
 else:
     cnames=["SEA4"]
@@ -260,7 +240,7 @@ simo.setup_component_sequence_connectivity("Npr3", res_cry)
 # Seh1; Residues (249-287) and (347-349) are missing in PDB
 tmp_color=0.4
 cnames={}
-if (inputs.ncopy == "3"):
+if inputs.ncopy == 3:
     cnames=["Seh1.1", "Seh1.2", "Seh1.3"]
 else:
     cnames=["Seh1"]
@@ -292,7 +272,7 @@ simo.setup_component_sequence_connectivity("Sec13", res_cry)
 #####################################################
 if (inputs.rmf_input!=None):
     print "Reading coordinates from", inputs.rmf_input, inputs.frame_number
-    simo.link_components_to_rmf(inputs.rmf_input, int(inputs.frame_number))
+    simo.link_components_to_rmf(inputs.rmf_input, inputs.frame_number)
 
     simo.set_rigid_bodies([("SEA1",(101,275))])
     simo.set_rigid_bodies([("SEA1",(279,473))]) 
@@ -303,7 +283,7 @@ if (inputs.rmf_input!=None):
     simo.set_rigid_bodies([("SEA3",(430,536))])
     simo.set_rigid_bodies([("SEA3",(1092,1139))])
     
-    if (inputs.ncopy == "3"):
+    if inputs.ncopy == 3:
         simo.set_rigid_bodies([("SEA4.1",(45,426))])
         simo.set_rigid_bodies([("SEA4.1",(659,835))])
         simo.set_rigid_bodies([("SEA4.1",(942,1032))])
@@ -344,7 +324,7 @@ else:
     simo.set_rigid_bodies([("SEA3",(430,536))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
     simo.set_rigid_bodies([("SEA3",(1092,1139))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
     
-    if (inputs.ncopy == "3"):
+    if inputs.ncopy == 3:
         simo.set_rigid_bodies([("SEA4.1",(45,426))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
         simo.set_rigid_bodies([("SEA4.1",(659,835))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
         simo.set_rigid_bodies([("SEA4.1",(942,1032))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
@@ -374,7 +354,7 @@ else:
     simo.set_rigid_bodies([("Npr3",(1083,1140))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
     simo.set_rigid_bodies(["Sec13"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
 
-if (inputs.ncopy == "3") and (inputs.symmetry):
+if inputs.ncopy == 3 and inputs.symmetry:
     simo.create_rotational_symmetry("SEA4.1",["SEA4.2","SEA4.3"])
     simo.create_rotational_symmetry("Seh1.1",["Seh1.2","Seh1.3"])
 
@@ -395,7 +375,7 @@ if (inputs.draw_hierarchy):
     simo.show_component_table("SEA1")
     simo.show_component_table("SEA2")
     simo.show_component_table("SEA3")
-    if (inputs.ncopy == "3"):
+    if inputs.ncopy == 3:
         simo.show_component_table("SEA4.1")
         simo.show_component_table("SEA4.2")
         simo.show_component_table("SEA4.3")
@@ -439,9 +419,9 @@ print "ExcludedVolumeSphere !!"
 #####################################################
 # setting up the composite restraint
 #####################################################
-weight = float(inputs.weight)
+weight = inputs.weight
 crd={}
-if (inputs.ncopy == "3"):
+if inputs.ncopy == 3:
     crd["Npr2_dNpr2_497_615_P"]=[(1,496,"Npr2"),"Npr3"]
     crd["SEA4_dSEA4:931-1038_P"]=[(1,930,"SEA4.1"),(1,930,"SEA4.2"),(1,930,"SEA4.3"),"Seh1.1","Seh1.2","Seh1.3"]
     if (inputs.refinement):
@@ -541,7 +521,7 @@ output.init_stat2(inputs.stat_output, outputobjects, extralabels=["rmf_file","rm
 #####################################################
 # RMF split
 rmf_nframes = 500
-nrmf_files = int( int(inputs.nrepeats) / rmf_nframes )
+nrmf_files = int( inputs.nrepeats / rmf_nframes )
 print "nrmf_files = ", nrmf_files 
 
 for k in range(nrmf_files):
@@ -566,7 +546,7 @@ for k in range(nrmf_files):
 
 """
 #cg.run(ncycl/10)
-for i in range(int(inputs.nrepeats)):
+for i in range(inputs.nrepeats):
     #cg.run(2)
     mc.run(ncycl)
     print mc.get_frame_number()+1
