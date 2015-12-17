@@ -30,25 +30,25 @@ partialscore2 = []
 #####################################################
 # Parsing parameter inputs
 #####################################################
-import argparse
+import optparse
 
-parser = argparse.ArgumentParser(description='Performing the INITIAL/REFINEMENT Monte Carlo job, with crosslinks and selected/ALL domain mapping data. Example of usage: setup_environment.sh python ./sj_SEA_XLDM.py -f models_1877.rmf -n 0')
-parser.add_argument('-copy', action="store", dest="ncopy", help="copy numbers (stoichiometry) for SEA4 and Seh1" )
-parser.add_argument('-sym', action="store", dest="symmetry", help="symmetry option for SEA4 and Seh1" )
-parser.add_argument('-f', action="store", dest="rmf_input", help="rmf file name to continue" )
-parser.add_argument('-n', action="store", dest="frame_number", help="frame number to continue" )
-parser.add_argument('-r', action="store", dest="nrepeats", help="number of Monte Carlo cycles" )
-parser.add_argument('-x', action="store", dest="XL_input", help="Cross-links file name to read" )
-parser.add_argument('-o', action="store", dest="rmf_output", help="rmf file name for output" )
-parser.add_argument('-s', action="store", dest="stat_output", help="stat file name for output" )
-parser.add_argument('-REFINE', action="store", dest="refinement", help="refinement True or False" )
-parser.add_argument('-w', action="store", dest="weight", help="weight for domain mapping data" )
-parser.add_argument('-res_cry', action="store", dest="res_cry", help="resolution of the crystal structures" )
-parser.add_argument('-res_hom', action="store", dest="res_hom", help="resolution of the comparative (homology) models" )
-parser.add_argument('-res_ev', action="store", dest="res_ev", help="resolution of the excluded volume restraints" )
-parser.add_argument('-res_compo', action="store", dest="res_compo", help="resolution of the composite restraints" )
-parser.add_argument('-draw_hierarchy', action="store", dest="draw_hierarchy", help="draw hierarchy" )
-inputs = parser.parse_args()
+parser = optparse.OptionParser(description='Performing the INITIAL/REFINEMENT Monte Carlo job, with crosslinks and selected/ALL domain mapping data. Example of usage: setup_environment.sh python ./sj_SEA_XLDM.py -f models_1877.rmf -n 0')
+parser.add_option('--copy', action="store", dest="ncopy", help="copy numbers (stoichiometry) for SEA4 and Seh1" )
+parser.add_option('--sym', action="store", dest="symmetry", help="symmetry option for SEA4 and Seh1" )
+parser.add_option('-f', action="store", dest="rmf_input", help="rmf file name to continue" )
+parser.add_option('-n', action="store", dest="frame_number", help="frame number to continue" )
+parser.add_option('-r', action="store", dest="nrepeats", help="number of Monte Carlo cycles" )
+parser.add_option('-x', action="store", dest="XL_input", help="Cross-links file name to read" )
+parser.add_option('-o', action="store", dest="rmf_output", help="rmf file name for output" )
+parser.add_option('-s', action="store", dest="stat_output", help="stat file name for output" )
+parser.add_option('--REFINE', action="store", dest="refinement", help="refinement True or False" )
+parser.add_option('-w', action="store", dest="weight", help="weight for domain mapping data" )
+parser.add_option('--res_cry', action="store", dest="res_cry", help="resolution of the crystal structures" )
+parser.add_option('--res_hom', action="store", dest="res_hom", help="resolution of the comparative (homology) models" )
+parser.add_option('--res_ev', action="store", dest="res_ev", help="resolution of the excluded volume restraints" )
+parser.add_option('--res_compo', action="store", dest="res_compo", help="resolution of the composite restraints" )
+parser.add_option('--draw_hierarchy', action="store", dest="draw_hierarchy", help="draw hierarchy" )
+inputs, args = parser.parse_args()
 
 # Setting up the input parameters
 if inputs.ncopy==None:
