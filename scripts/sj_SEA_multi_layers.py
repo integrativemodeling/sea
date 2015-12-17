@@ -6,7 +6,6 @@
 #####################################################
 import IMP
 import IMP.core
-import IMP.base
 import IMP.algebra
 import IMP.atom
 import IMP.container
