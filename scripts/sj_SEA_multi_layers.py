@@ -351,7 +351,6 @@ if (inputs.draw_hierarchy):
     d = simo.get_particles_to_sample()
     print d
 
-prot = simo.get_hierarchy()
 #simo.set_output_level("high")
 
 #expl=simo.get_connected_intra_pairs()
@@ -365,7 +364,7 @@ partialscore2.append(simo)
 # Restraints setup
 # Excluded Volume restraint
 #####################################################
-ev = restraints.ExcludedVolumeSphere(prot, resolution=res_ev)
+ev = restraints.ExcludedVolumeSphere(simo, resolution=res_ev)
 #ev.add_excluded_particle_pairs(expl)
 ev.add_to_model()
 #ev.set_weight(0.1)
@@ -410,7 +409,7 @@ else:
         print "All composite restraints !! with weight =", weight
     
 for key in crd:
-    cr=restraints.ConnectivityRestraint(prot,crd[key],resolution=res_compo)
+    cr=restraints.ConnectivityRestraint(simo,crd[key],resolution=res_compo)
     cr.add_to_model()
     cr.set_label(key)
     cr.set_weight(weight)
@@ -428,10 +427,10 @@ print "Composite Restraint !! with weight =", weight
 #####################################################
 #res_XL = res_cry + 1.0
 res_XL = res_cry
-xl = restraints.ConnectivityCrossLinkMS(prot, inputs.XL_input, expdistance=17., resolution=res_XL)
-#xl = restraints.ConnectivityCrossLinkMS(prot, inputs.XL_input, expdistance=17., strength=0.2, resolution=res_XL)
-#xl = restraints.SimplifiedCrossLinkMS(prot, inputs.XL_input, expdistance=17., strength=0.2)
-#xl = restraints.SigmoidCrossLinkMS(prot, inputs.XL_input, inflection=25., slope=1.0, amplitude=1.0, resolution=res_XL)
+xl = restraints.ConnectivityCrossLinkMS(simo, inputs.XL_input, expdistance=17., resolution=res_XL)
+#xl = restraints.ConnectivityCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2, resolution=res_XL)
+#xl = restraints.SimplifiedCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2)
+#xl = restraints.SigmoidCrossLinkMS(simo, inputs.XL_input, inflection=25., slope=1.0, amplitude=1.0, resolution=res_XL)
 #xl.plot_restraint(uncertainty1=4.95, uncertainty2=6.25, maxdist=100)
 
 xl.add_to_model()
@@ -462,7 +461,7 @@ sw = tools.Stopwatch()
 outputobjects.append(sw)
 
 output = output.Output()
-#output.init_rmf(inputs.rmf_output, prot)
+#output.init_rmf(inputs.rmf_output, simo.prot)
 #output.add_restraints_to_rmf("models.rmf",[xl])
 
 #the fields rmf_file and rmf_frame_index will be printed into the 
@@ -488,7 +487,7 @@ for k in range(nrmf_files):
         rmf_file="models."+str(k)+".rmf"
     else:
         rmf_file="REFINED_models."+str(k)+".rmf"
-    output.init_rmf(rmf_file, prot)
+    output.init_rmf(rmf_file, simo.prot)
     #output.write_rmfs(0)
 
     for i in range(rmf_nframes):
