@@ -270,89 +270,48 @@ simo.setup_component_sequence_connectivity("Sec13", res_cry)
 ## Read the coordinates from the previous runs,
 ## or starts from scratch
 #####################################################
-if (inputs.rmf_input!=None):
+if inputs.rmf_input:
     print "Reading coordinates from", inputs.rmf_input, inputs.frame_number
     simo.link_components_to_rmf(inputs.rmf_input, inputs.frame_number)
 
-    simo.set_rigid_bodies([("SEA1",(101,275))])
-    simo.set_rigid_bodies([("SEA1",(279,473))]) 
-    simo.set_rigid_bodies([("SEA1",(1178,1273))]) 
-    simo.set_rigid_bodies([("SEA2",(127,520))])
-    simo.set_rigid_bodies([("SEA2",(1280,1341))])
-    simo.set_rigid_bodies([("SEA3",(54,424))])
-    simo.set_rigid_bodies([("SEA3",(430,536))])
-    simo.set_rigid_bodies([("SEA3",(1092,1139))])
-    
-    if inputs.ncopy == 3:
-        simo.set_rigid_bodies([("SEA4.1",(45,426))])
-        simo.set_rigid_bodies([("SEA4.1",(659,835))])
-        simo.set_rigid_bodies([("SEA4.1",(942,1032))])
-        simo.set_rigid_bodies(["Seh1.1"])
-        if not (inputs.symmetry):
-            simo.set_rigid_bodies([("SEA4.2",(45,426))])
-            simo.set_rigid_bodies([("SEA4.2",(659,835))])
-            simo.set_rigid_bodies([("SEA4.2",(942,1032))])
-            simo.set_rigid_bodies([("SEA4.3",(45,426))])
-            simo.set_rigid_bodies([("SEA4.3",(659,835))])
-            simo.set_rigid_bodies([("SEA4.3",(942,1032))])
-            simo.set_rigid_bodies(["Seh1.2"])
-            simo.set_rigid_bodies(["Seh1.3"])
-    else:
-        simo.set_rigid_bodies([("SEA4",(45,426))])
-        simo.set_rigid_bodies([("SEA4",(659,835))])
-        simo.set_rigid_bodies([("SEA4",(942,1032))])
-        simo.set_rigid_bodies(["Seh1"])
-    
-    simo.set_rigid_bodies([("Npr2",(9,127))])
-    simo.set_rigid_bodies([("Npr2",(257,327))])
-    simo.set_rigid_bodies([("Npr2",(563,610))])
-    simo.set_rigid_bodies([("Npr3",(1,31))])
-    simo.set_rigid_bodies([("Npr3",(322,438))])
-    simo.set_rigid_bodies([("Npr3",(531,577))])
-    simo.set_rigid_bodies([("Npr3",(950,988))])
-    simo.set_rigid_bodies([("Npr3",(1083,1140))])
-    simo.set_rigid_bodies(["Sec13"])
+simo.set_rigid_bodies([("SEA1",(101,275))])
+simo.set_rigid_bodies([("SEA1",(279,473))])
+simo.set_rigid_bodies([("SEA1",(1178,1273))])
+simo.set_rigid_bodies([("SEA2",(127,520))])
+simo.set_rigid_bodies([("SEA2",(1280,1341))])
+simo.set_rigid_bodies([("SEA3",(54,424))])
+simo.set_rigid_bodies([("SEA3",(430,536))])
+simo.set_rigid_bodies([("SEA3",(1092,1139))])
 
+if inputs.ncopy == 3:
+    simo.set_rigid_bodies([("SEA4.1",(45,426))])
+    simo.set_rigid_bodies([("SEA4.1",(659,835))])
+    simo.set_rigid_bodies([("SEA4.1",(942,1032))])
+    simo.set_rigid_bodies(["Seh1.1"])
+    if not (inputs.symmetry):
+        simo.set_rigid_bodies([("SEA4.2",(45,426))])
+        simo.set_rigid_bodies([("SEA4.2",(659,835))])
+        simo.set_rigid_bodies([("SEA4.2",(942,1032))])
+        simo.set_rigid_bodies([("SEA4.3",(45,426))])
+        simo.set_rigid_bodies([("SEA4.3",(659,835))])
+        simo.set_rigid_bodies([("SEA4.3",(942,1032))])
+        simo.set_rigid_bodies(["Seh1.2"])
+        simo.set_rigid_bodies(["Seh1.3"])
 else:
-    rmx=150
-    simo.set_rigid_bodies([("SEA1",(101,275))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("SEA1",(279,473))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx))) 
-    simo.set_rigid_bodies([("SEA1",(1178,1273))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx))) 
-    simo.set_rigid_bodies([("SEA2",(127,520))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("SEA2",(1280,1341))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("SEA3",(54,424))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("SEA3",(430,536))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("SEA3",(1092,1139))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    
-    if inputs.ncopy == 3:
-        simo.set_rigid_bodies([("SEA4.1",(45,426))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies([("SEA4.1",(659,835))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies([("SEA4.1",(942,1032))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies(["Seh1.1"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        if not (inputs.symmetry):
-            simo.set_rigid_bodies([("SEA4.2",(45,426))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies([("SEA4.2",(659,835))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies([("SEA4.2",(942,1032))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies([("SEA4.3",(45,426))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies([("SEA4.3",(659,835))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies([("SEA4.3",(942,1032))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies(["Seh1.2"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-            simo.set_rigid_bodies(["Seh1.3"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    else:
-        simo.set_rigid_bodies([("SEA4",(45,426))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies([("SEA4",(659,835))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies([("SEA4",(942,1032))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-        simo.set_rigid_bodies(["Seh1"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    
-    simo.set_rigid_bodies([("Npr2",(9,127))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr2",(257,327))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr2",(563,610))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr3",(1,31))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr3",(322,438))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr3",(531,577))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr3",(950,988))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies([("Npr3",(1083,1140))],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
-    simo.set_rigid_bodies(["Sec13"],(random.uniform(-rmx, rmx), random.uniform(-rmx, rmx), random.uniform(-rmx, rmx)))
+    simo.set_rigid_bodies([("SEA4",(45,426))])
+    simo.set_rigid_bodies([("SEA4",(659,835))])
+    simo.set_rigid_bodies([("SEA4",(942,1032))])
+    simo.set_rigid_bodies(["Seh1"])
+
+simo.set_rigid_bodies([("Npr2",(9,127))])
+simo.set_rigid_bodies([("Npr2",(257,327))])
+simo.set_rigid_bodies([("Npr2",(563,610))])
+simo.set_rigid_bodies([("Npr3",(1,31))])
+simo.set_rigid_bodies([("Npr3",(322,438))])
+simo.set_rigid_bodies([("Npr3",(531,577))])
+simo.set_rigid_bodies([("Npr3",(950,988))])
+simo.set_rigid_bodies([("Npr3",(1083,1140))])
+simo.set_rigid_bodies(["Sec13"])
 
 if inputs.ncopy == 3 and inputs.symmetry:
     simo.create_rotational_symmetry("SEA4.1",["SEA4.2","SEA4.3"])
@@ -365,8 +324,8 @@ simo.set_floppy_bodies_max_trans(fbmaxtrans)
 
 
 #re-orient initial positions
-if (inputs.rmf_input==None):
-    simo.shuffle_configuration(translate=False)
+if not inputs.rmf_input:
+    simo.shuffle_configuration(max_translation=300.0)
 
 if (inputs.draw_hierarchy):
     simo.draw_hierarchy_composition()
