@@ -10,6 +10,9 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
+import IMP.pmi.restraints.stereochemistry
+import IMP.pmi.restraints.proteomics
+import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints as restraints
 import IMP.pmi.representation as representation
 import IMP.pmi.tools as tools
@@ -364,7 +367,8 @@ partialscore2.append(simo)
 # Restraints setup
 # Excluded Volume restraint
 #####################################################
-ev = restraints.ExcludedVolumeSphere(simo, resolution=res_ev)
+ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
+                                                 simo, resolution=res_ev)
 #ev.add_excluded_particle_pairs(expl)
 ev.add_to_model()
 #ev.set_weight(0.1)
@@ -409,7 +413,8 @@ else:
         print "All composite restraints !! with weight =", weight
     
 for key in crd:
-    cr=restraints.ConnectivityRestraint(simo,crd[key],resolution=res_compo)
+    cr=IMP.pmi.restraints.proteomics.ConnectivityRestraint(
+                                     simo,crd[key],resolution=res_compo)
     cr.add_to_model()
     cr.set_label(key)
     cr.set_weight(weight)
@@ -427,7 +432,8 @@ print "Composite Restraint !! with weight =", weight
 #####################################################
 #res_XL = res_cry + 1.0
 res_XL = res_cry
-xl = restraints.ConnectivityCrossLinkMS(simo, inputs.XL_input, expdistance=17., resolution=res_XL)
+xl = IMP.pmi.restraints.crosslinking.ConnectivityCrossLinkMS(
+                    simo, inputs.XL_input, expdistance=17., resolution=res_XL)
 #xl = restraints.ConnectivityCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2, resolution=res_XL)
 #xl = restraints.SimplifiedCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2)
 #xl = restraints.SigmoidCrossLinkMS(simo, inputs.XL_input, inflection=25., slope=1.0, amplitude=1.0, resolution=res_XL)
