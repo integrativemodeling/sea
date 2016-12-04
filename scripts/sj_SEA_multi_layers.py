@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #####################################################
-# Last Update: Oct 24, 2013 
+# Last Update: Oct 24, 2013
 # by Seung Joong Kim, Peter Cimermancic, Riccardo Pellarin
 # at Andrej Sali group, University of California San Francisco (UCSF)
 #####################################################
@@ -35,7 +35,7 @@ partialscore2 = []
 #####################################################
 import optparse
 
-parser = optparse.OptionParser(description='Performing the INITIAL/REFINEMENT Monte Carlo job, with crosslinks and selected/ALL domain mapping data. Example of usage: setup_environment.sh python ./sj_SEA_XLDM.py -f models_1877.rmf -n 0')
+parser = optparse.OptionParser(description='Performing the INITIAL/REFINEMENT Monte Carlo job, with crosslinks and selected/ALL domain mapping data. Example of usage: setup_environment.sh python ./sj_SEA_multi_layers.py -f models_1877.rmf -n 0')
 parser.add_option('--copy', action="store", dest="ncopy", help="copy numbers (stoichiometry) for SEA4 and Seh1", type="int", default=3)
 parser.add_option('--sym', action="store", dest="symmetry", help="symmetry option for SEA4 and Seh1" )
 parser.add_option('-f', action="store", dest="rmf_input", help="rmf file name to continue" )
@@ -88,7 +88,7 @@ res_hom = inputs.res_hom
 res_ev = inputs.res_ev
 res_compo = inputs.res_compo
 res = []
-res2 = [] 
+res2 = []
 
 #list of resolution for the homology (comparative) models
 if (res_hom == res_ev):
@@ -192,9 +192,9 @@ for cname in cnames:
     simo.add_component_pdb(cname,'../pdb/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(356,426))
     ds=[(427,490),\
         (491,574),(575,658)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'../pdb/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(659,782))    
+    simo.add_component_pdb(cname,'../pdb/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(659,782))
     ds=[(783,808)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'../pdb/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(809,835))    
+    simo.add_component_pdb(cname,'../pdb/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(809,835))
     ds=[(836,888),\
         (889,941)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     simo.add_component_pdb(cname,'../pdb/SEA4_942-1032.pdb', "A", resolutions=res, color=tmp_color, resrange=(942,963))
@@ -317,8 +317,8 @@ simo.set_rigid_bodies([("Npr3",(1083,1140))])
 simo.set_rigid_bodies(["Sec13"])
 
 if inputs.ncopy == 3 and inputs.symmetry:
-    simo.create_rotational_symmetry("SEA4.1",["SEA4.2","SEA4.3"])
-    simo.create_rotational_symmetry("Seh1.1",["Seh1.2","Seh1.3"])
+    simo.create_rotational_symmetry("SEA4.1",["SEA4.2","SEA4.3"], rotational_axis=IMP.algebra.Vector3D(0, 0, 1.0))
+    simo.create_rotational_symmetry("Seh1.1",["Seh1.2","Seh1.3"], rotational_axis=IMP.algebra.Vector3D(0, 0, 1.0))
 
 simo.set_floppy_bodies()
 simo.set_rigid_bodies_max_trans(rbmaxtrans)
@@ -326,9 +326,21 @@ simo.set_rigid_bodies_max_rot(rbmaxrot)
 simo.set_floppy_bodies_max_trans(fbmaxtrans)
 
 
-#re-orient initial positions
+#####################################################
+# rigidify floppy bodies for clones
+#####################################################
+for rt in ['SEA4.2', 'SEA4.3', 'Seh1.2', 'Seh1.3']:
+    hs = IMP.pmi.tools.select_by_tuple(simo, rt)
+    simo.remove_floppy_bodies(hs)
+
+
+#####################################################
+# randomize the initial configuration
+#####################################################
 if not inputs.rmf_input:
-    simo.shuffle_configuration(max_translation=300.0)
+    box_size = 150.0
+    simo.shuffle_configuration( bounding_box=( (-box_size, -box_size, -box_size), (box_size, box_size, box_size) ),
+                                ignore_initial_coordinates=True, cutoff=1.0, niterations=1000 )
 
 if (inputs.draw_hierarchy):
     simo.draw_hierarchy_composition()
@@ -367,8 +379,7 @@ partialscore2.append(simo)
 # Restraints setup
 # Excluded Volume restraint
 #####################################################
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
-                                                 simo, resolution=res_ev)
+ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution=res_ev)
 #ev.add_excluded_particle_pairs(expl)
 ev.add_to_model()
 #ev.set_weight(0.1)
@@ -396,7 +407,7 @@ if inputs.ncopy == 3:
         crd["SEA3_dSEA3:910-1148_P"]=["SEA1","Npr2","Npr3",(1,909,"SEA3"),"Sec13"]
         crd["SEA4_dSEA3_P"]=["SEA4.1","SEA4.2","SEA4.3","Seh1.1","Seh1.2","Seh1.3","SEA2"]
         crd["SEA4_dSEA3_P2"]=["SEA4.1","SEA4.2","SEA4.3","Seh1.1","Seh1.2","Seh1.3"]
-        print "All composite restraints !! with weight =", weight    
+        print "All composite restraints !! with weight =", weight
 else:
     crd["Npr2_dNpr2_497_615_P"]=[(1,496,"Npr2"),"Npr3"]
     if (inputs.refinement):
@@ -411,14 +422,14 @@ else:
         crd["SEA4_dSEA3_P2"]=["SEA4","Seh1"]
         crd["SEA4_dSEA4:931-1038_P"]=[(1,930,"SEA4"),"Seh1"]
         print "All composite restraints !! with weight =", weight
-    
+
 for key in crd:
     cr=IMP.pmi.restraints.proteomics.ConnectivityRestraint(
-                                     simo,crd[key],resolution=res_compo)
+                                     simo, crd[key], resolution=res_compo)
     cr.add_to_model()
     cr.set_label(key)
     cr.set_weight(weight)
-    partialscore1.append(cr)  
+    partialscore1.append(cr)
     partialscore2.append(cr)
     outputobjects.append(cr)
     print key, crd[key]
@@ -470,8 +481,8 @@ output = output.Output()
 #output.init_rmf(inputs.rmf_output, simo.prot)
 #output.add_restraints_to_rmf("models.rmf",[xl])
 
-#the fields rmf_file and rmf_frame_index will be printed into the 
-#stat file, so that you'll keep track of the rmffile and the frame 
+#the fields rmf_file and rmf_frame_index will be printed into the
+#stat file, so that you'll keep track of the rmffile and the frame
 #corresponding to that entry in the stat file
 output.init_stat2(inputs.stat_output, outputobjects, extralabels=["rmf_file","rmf_frame_index"], listofsummedobjects=[(partialscore1,"PartialScore1"),(partialscore2,"PartialScore2")])
 #output.init_stat2(inputs.stat_output, outputobjects, listofsummedobjects=[(partialscore1,"PartialScore1"),(partialscore2,"PartialScore2")])
@@ -486,14 +497,14 @@ output.init_stat2(inputs.stat_output, outputobjects, extralabels=["rmf_file","rm
 # RMF split
 rmf_nframes = 500
 nrmf_files = int( inputs.nrepeats / rmf_nframes )
-print "nrmf_files = ", nrmf_files 
+print "nrmf_files = ", nrmf_files
 
 for k in range(nrmf_files):
     if (inputs.rmf_output == "models.rmf"):
         rmf_file="models."+str(k)+".rmf"
     else:
         rmf_file="REFINED_models."+str(k)+".rmf"
-    output.init_rmf(rmf_file, simo.prot)
+    output.init_rmf(rmf_file, hierarchies=[simo.prot])
     #output.write_rmfs(0)
 
     for i in range(rmf_nframes):
@@ -503,7 +514,8 @@ for k in range(nrmf_files):
         output.set_output_entry("rmf_file", rmf_file)
         output.set_output_entry("rmf_frame_index", i)
         output.write_stats2()
-        output.write_rmf(rmf_file, i)
+        #output.write_rmf(rmf_file, i)
+        output.write_rmf(rmf_file)
 
     output.close_rmf(rmf_file)
 
@@ -517,4 +529,3 @@ for i in range(inputs.nrepeats):
     output.write_stats2()
     output.write_rmfs(mc.get_frame_number()+1)
 """
-
