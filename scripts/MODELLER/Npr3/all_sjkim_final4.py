@@ -83,34 +83,19 @@ aln.check()
 #exit()
 ######################### 4. model-single.py ########################
 class MyModel(automodel):
+    def special_patches(self, aln):
+        self.rename_segments('A', 950)
+
     def special_restraints(self, aln):
         rsr = self.restraints
         at = self.atoms
-#       Add some restraints from a file:
-#       rsr.append(file='my_rsrs1.rsr')
-
-#       Residues 20 through 30 should be an alpha helix:
-        #rsr.add(secondary_structure.alpha(self.residue_range('20:', '30:')))
-#       Two beta-strands:
-        #rsr.add(secondary_structure.strand(self.residue_range('1:', '6:')))
-        #rsr.add(secondary_structure.strand(self.residue_range('9:', '14:')))
-#       An anti-parallel sheet composed of the two strands:
-        #rsr.add(secondary_structure.sheet(at['N:1'], at['O:14'],
-        #                                  sheet_h_bonds=-5))
-#       Use the following instead for a *parallel* sheet:
-        #rsr.add(secondary_structure.sheet(at['N:1'], at['O:9'],
-        #                                  sheet_h_bonds=5))
-
-#       Restrain the specified CA-CA distance to 10 angstroms (st. dev.=0.1)
-#       Use a harmonic potential and X-Y distance group.
         rsr.add(forms.gaussian(group=physical.xy_distance,
-                               feature=features.distance(at['CA:25'],
-                                                         at['CA:30']),
+                               feature=features.distance(at['CA:974:A'],
+                                                         at['CA:979:A']),
                                mean=17.0, stdev=5.0))
 
 a = MyModel(env,
             alnfile  = 'all_align_final4.ali',     # alignment filename
-            #knowns=('3t97C', '3ghgA', '3ghgA', '3u0cA'),
             knowns=('4f54A'),               # codes of the templates
             sequence = 'Npr3',              # code of the target
             assess_methods=(assess.DOPE, assess.GA341))
@@ -119,30 +104,6 @@ a.starting_model= 1                 # index of the first model
 a.ending_model  = 20                # index of the last model
                                     # (determines how many models to calculate)
 a.make()                            # do homology modeling
-
-"""
-a = automodel(env, 
-              alnfile='all_align_final4.ali',
-              #knowns=('3t97C', '3ghgA', '3ghgA', '3u0cA'),
-              knowns=('4f54A'),  
-              sequence='Npr3',
-              assess_methods=(assess.DOPE, assess.GA341))
-
-a.starting_model = 1
-a.ending_model = 20
-
-a.make()
-"""
-
-for files in os.listdir('.'):
-    if fnmatch.fnmatch(files, 'Npr3.B*.pdb'):
-        print files
-        mdl = model(env, file=files)
-        mdl.rename_segments('A', 950)
-        mdl.write(files)
-
-
-#a.rename_segments('A', 601)
 
 ######################## 5. evaluate_model.py ########################
 #env = environ()

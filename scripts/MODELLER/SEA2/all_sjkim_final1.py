@@ -83,57 +83,41 @@ aln.check()
 #exit()
 ######################### 4. model-single.py ########################
 class MyModel(automodel):
+    def special_patches(self, aln):
+        self.rename_segments('A', 127)
+
     def special_restraints(self, aln):
         rsr = self.restraints
         at = self.atoms
-#       Add some restraints from a file:
-#       rsr.append(file='my_rsrs1.rsr')
-
-#       Residues 20 through 30 should be an alpha helix:
-        #rsr.add(secondary_structure.alpha(self.residue_range('20:', '30:')))
-#       Two beta-strands:
-        #rsr.add(secondary_structure.strand(self.residue_range('1:', '6:')))
-        #rsr.add(secondary_structure.strand(self.residue_range('9:', '14:')))
-#       An anti-parallel sheet composed of the two strands:
-        #rsr.add(secondary_structure.sheet(at['N:1'], at['O:14'],
-        #                                  sheet_h_bonds=-5))
-#       Use the following instead for a *parallel* sheet:
-        #rsr.add(secondary_structure.sheet(at['N:1'], at['O:9'],
-        #                                  sheet_h_bonds=5))
-
-#       Restrain the specified CA-CA distance to 10 angstroms (st. dev.=0.1)
-#       Use a harmonic potential and X-Y distance group.
-        #http://salilab.org/modeller/manual/node27.html
-        
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['CA:20'],
-                                                         at['CA:10']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['CA:146:A'],
+                                                            at['CA:136:A']),
+                                  mean=17.0, stdev=5.0))
 
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['CA:50'],
-                                                         at['CA:41']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['CA:176:A'],
+                                                            at['CA:167:A']),
+                                  mean=17.0, stdev=5.0))
 
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['NZ:73'],
-                                                         at['NZ:168']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['NZ:199:A'],
+                                                            at['NZ:294:A']),
+                                  mean=17.0, stdev=5.0))
 
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['CA:73'],
-                                                         at['CA:168']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['CA:199:A'],
+                                                            at['CA:294:A']),
+                                  mean=17.0, stdev=5.0))
 
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['NZ:82'],
-                                                         at['NZ:168']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['NZ:208:A'],
+                                                            at['NZ:294:A']),
+                                  mean=17.0, stdev=5.0))
 
         rsr.add(forms.upper_bound(group=physical.xy_distance,
-                               feature=features.distance(at['CA:82'],
-                                                         at['CA:168']),
-                               mean=17.0, stdev=5.0))
+                                  feature=features.distance(at['CA:208:A'],
+                                                            at['CA:294:A']),
+                                  mean=17.0, stdev=5.0))
 
 a = MyModel(env,
               alnfile='all_align_final1.ali',
@@ -146,30 +130,6 @@ a.starting_model= 1                 # index of the first model
 a.ending_model  = 200               # index of the last model
                                     # (determines how many models to calculate)
 a.make()                            # do homology modeling
-
-"""
-a = automodel(env, 
-              alnfile='all_align_final1.ali',
-              #knowns=('3t97C', '3ghgA', '3ghgA', '3u0cA'),
-              knowns=('4j73A'),  
-              sequence='SEA2',
-              assess_methods=(assess.DOPE, assess.GA341))
-
-a.starting_model = 1
-a.ending_model = 20
-
-a.make()
-"""
-
-for files in os.listdir('.'):
-    if fnmatch.fnmatch(files, 'SEA2.B*.pdb'):
-        print files
-        mdl = model(env, file=files)
-        mdl.rename_segments('A', 127)
-        mdl.write(files)
-
-
-#a.rename_segments('A', 601)
 
 ######################## 5. evaluate_model.py ########################
 #env = environ()

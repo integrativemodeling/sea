@@ -82,28 +82,20 @@ aln.check()
 
 #exit()
 ######################### 4. model-single.py ########################
-a = automodel(env, 
-              alnfile='all_align_final2.ali',
-              #knowns=('3t97C', '3ghgA', '3ghgA', '3u0cA'),
-              knowns=('1jeyB'),  
-              sequence='SEA1',
-              assess_methods=(assess.DOPE, assess.GA341))
+class MyModel(automodel):
+    def special_patches(self, aln):
+        self.rename_segments('A', 279)
+
+a = MyModel(env, 
+            alnfile='all_align_final2.ali',
+            knowns=('1jeyB'),  
+            sequence='SEA1',
+            assess_methods=(assess.DOPE, assess.GA341))
 
 a.starting_model = 1
 a.ending_model = 20
 
 a.make()
-
-
-for files in os.listdir('.'):
-    if fnmatch.fnmatch(files, 'SEA1.B*.pdb'):
-        print files
-        mdl = model(env, file=files)
-        mdl.rename_segments('A', 279)
-        mdl.write(files)
-
-
-#a.rename_segments('A', 601)
 
 ######################## 5. evaluate_model.py ########################
 #env = environ()
