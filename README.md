@@ -39,25 +39,25 @@ A full description of the scripts can be found in
     (`Chimera_three_sym.py`) to display them.
 
 ## Running the MODELLER scripts:
-- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final1.py` : Npr2 9-127
-- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final2.py` : Npr2 257-327
-- `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final3.py` : Npr2 563-610
-- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final1.py` : Npr3 322-438
-- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final2.py` : Npr3 531-577
-- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final3.py` : Npr3 1-31
-- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final4.py` : Npr3 950-988
-- `mod9.12 scripts/MODELLER/Npr3/all_sjkim_final5.py` : Npr3 1083-1140
-- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final1.py` : SEA1 101-275
-- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final2.py` : SEA1 279-473
-- `mod9.12 scripts/MODELLER/SEA1/all_sjkim_final3.py` : SEA1 1178-1273
-- `mod9.12 scripts/MODELLER/SEA2/all_sjkim_final1.py` : SEA2 127-520
-- `mod9.12 scripts/MODELLER/SEA2/all_sjkim_final2.py` : SEA2 1280-1341
-- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final1.py` : SEA3 54-424
-- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final2.py` : SEA3 430-536
-- `mod9.12 scripts/MODELLER/SEA3/all_sjkim_final3.py` : SEA3 1092-1139
-- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final1.py` : SEA4 45-426
-- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final2.py` : SEA4 659-835
-- `mod9.12 scripts/MODELLER/SEA4/all_sjkim_final3.py` : SEA4 942-1032
+- `cd scripts/MODELLER/Npr2 && python all_sjkim_final1.py` : Npr2 9-127
+- `cd scripts/MODELLER/Npr2 && python all_sjkim_final2.py` : Npr2 257-327
+- `cd scripts/MODELLER/Npr2 && python all_sjkim_final3.py` : Npr2 563-610
+- `cd scripts/MODELLER/Npr3 && python all_sjkim_final1.py` : Npr3 322-438
+- `cd scripts/MODELLER/Npr3 && python all_sjkim_final2.py` : Npr3 531-577
+- `cd scripts/MODELLER/Npr3 && python all_sjkim_final3.py` : Npr3 1-31
+- `cd scripts/MODELLER/Npr3 && python all_sjkim_final4.py` : Npr3 950-988
+- `cd scripts/MODELLER/Npr3 && python all_sjkim_final5.py` : Npr3 1083-1140
+- `cd scripts/MODELLER/SEA1 && python all_sjkim_final1.py` : SEA1 101-275
+- `cd scripts/MODELLER/SEA1 && python all_sjkim_final2.py` : SEA1 279-473
+- `cd scripts/MODELLER/SEA1 && python all_sjkim_final3.py` : SEA1 1178-1273
+- `cd scripts/MODELLER/SEA2 && python all_sjkim_final1.py` : SEA2 127-520
+- `cd scripts/MODELLER/SEA2 && python all_sjkim_final2.py` : SEA2 1280-1341
+- `cd scripts/MODELLER/SEA3 && python all_sjkim_final1.py` : SEA3 54-424
+- `cd scripts/MODELLER/SEA3 && python all_sjkim_final2.py` : SEA3 430-536
+- `cd scripts/MODELLER/SEA3 && python all_sjkim_final3.py` : SEA3 1092-1139
+- `cd scripts/MODELLER/SEA4 && python all_sjkim_final1.py` : SEA4 45-426
+- `cd scripts/MODELLER/SEA4 && python all_sjkim_final2.py` : SEA4 659-835
+- `cd scripts/MODELLER/SEA4 && python all_sjkim_final3.py` : SEA4 942-1032
 
 
 ## Running the IMP/PMI scripts for the SEA complex:
