@@ -16,8 +16,6 @@ A full description of the scripts can be found in
 - `scripts`
   - `sj_SEA_multi_layers.py`                   The main modeling script with 1:3 stoichiometry and rotational symmetry
 
-  - `chimera_scripts/sea_density.cmd`          Chimera script to view all localization density files 
-  
   - `MODELLER/Npr2` MODELLER scripts to generate comparative models of Npr2
 
   - `MODELLER/Npr3` MODELLER scripts to generate comparative models of Npr3
@@ -30,13 +28,15 @@ A full description of the scripts can be found in
   
   - `MODELLER/SEA4` MODELLER scripts to generate comparative models of SEA4
 
+- `output/three_sym_cluster`
 
-- `outputs/pdbs`    the production will write the best scoring models into pdb files they are initialized and then updated as long as the calculation goes
-                 (They are the best 500 models, so at the beginning they are empty, since you haven't start the calculation yet)
+  - Largest output cluster as a set of RMF files. Each file is named
+    `XX_REFINED_models_YY.rmf` where `XX` identifies the run from which the
+    model was taken and `YY` the frame number. For the publication, 885 runs
+    were carried out.
 
-- `outputs/rmfs`    the production will write the rmf3 files for lowest temperature replica.
-			
-- `stat.n.out`	 log files. They contain all relevant numbers of the calculation.
+  - `global` Localization densities in MRC format and a Chimera session file
+    (`Chimera_three_sym.py`) to display them.
 
 ## Running the MODELLER scripts:
 - `mod9.12 scripts/MODELLER/Npr2/all_sjkim_final1.py` : Npr2 9-127
