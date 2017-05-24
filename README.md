@@ -1,10 +1,11 @@
-These scripts demonstrate the use of [IMP](http://salilab.org/imp), [MODELLER](http://salilab.org/modeller), 
+These scripts demonstrate the use of [IMP](https://integrativemodeling.org/),
+[MODELLER](https://salilab.org/modeller), and
 [PMI](https://github.com/salilab/pmi) in the modeling of the SEA complex using 188 DSS chemical cross-links and 23 affinity purification data.
 
-First, [MODELLER](http://salilab.org/modeller) is used to generate
-initial structures for the individual components where reliable templates are available. Then, [IMP](http://salilab.org/imp) / [PMI](https://github.com/salilab/pmi) is used to model these components using the DSS/EDC crosslinks and the affinity purification data for the entire SEA complex.
+First, [MODELLER](https://salilab.org/modeller) is used to generate
+initial structures for the individual components where reliable templates are available. Then, [IMP](https://integrativemodeling.org/) / [PMI](https://github.com/salilab/pmi) are used to model these components using the DSS/EDC crosslinks and the affinity purification data for the entire SEA complex.
 
-The scripts work with the 65734ec version (develop branch) of [IMP](http://salilab.org/imp) and the 47dafcc version (develop branch) of [PMI](https://github.com/salilab/pmi).
+The scripts work with the 65734ec version (develop branch) of [IMP](https://integrativemodeling.org/) and the 47dafcc version (develop branch) of [PMI](https://github.com/salilab/pmi).
 
 A full description of the scripts can be found in
 [Molecular architecture and function of the SEA complex, a modulator of the TORC1 pathway](http://mcponline.org/content/early/2014/07/29/mcp.M114.039388).
@@ -87,7 +88,7 @@ modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2 of the License, or (at your option) any later version.
 
-_Last known good IMP version_: [![build info](https://salilab.org/imp/systems/?sysstat=13&branch=master)](http://salilab.org/imp/systems/) [![build info](https://salilab.org/imp/systems/?sysstat=13&branch=develop)](http://salilab.org/imp/systems/)
+_Last known good IMP version_: [![build info](https://salilab.org/imp/systems/?sysstat=13&branch=master)](https://integrativemodeling.org/systems/) [![build info](https://integrativemodeling.org/systems/?sysstat=13&branch=develop)](https://integrativemodeling.org/systems/)
 
 _Testable_: Yes.
 
