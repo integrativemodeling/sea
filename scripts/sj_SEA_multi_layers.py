@@ -4,6 +4,7 @@
 # by Seung Joong Kim, Peter Cimermancic, Riccardo Pellarin
 # at Andrej Sali group, University of California San Francisco (UCSF)
 #####################################################
+from __future__ import print_function
 import IMP
 import IMP.core
 import IMP.algebra
@@ -74,7 +75,7 @@ if (inputs.draw_hierarchy=="True") or (inputs.draw_hierarchy=="true") or (inputs
     inputs.draw_hierarchy = True
 else:
     inputs.draw_hierarchy = False
-print inputs
+print(inputs)
 
 
 #####################################################
@@ -97,7 +98,7 @@ elif (res_hom > res_ev):
     res = [res_ev, res_hom, res_compo]
 else:
     res = [res_hom, res_ev, res_compo]
-print "resolutions for the homology models = ", res
+print("resolutions for the homology models = ", res)
 
 #list of resolution for the crystal structures
 if (res_cry == res_ev):
@@ -106,7 +107,7 @@ elif (res_cry > res_ev):
     res2 = [res_ev, res_cry, res_compo]
 else:
     res2 = [res_cry, res_ev, res_compo]
-print "resolutions for the crystal structures = ", res2
+print("resolutions for the crystal structures = ", res2)
 
 
 # SEA1
@@ -203,7 +204,7 @@ for cname in cnames:
     ds=[(1033,1038)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     if not (inputs.symmetry) or (cname=="SEA4.1"):
         simo.setup_component_sequence_connectivity(cname, res_cry)
-    print cname
+    print(cname)
 
 
 # Npr2
@@ -255,7 +256,7 @@ for cname in cnames:
     ds=[(347,349)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     if not (inputs.symmetry) or (cname=="Seh1.1"):
         simo.setup_component_sequence_connectivity(cname, res_cry)
-    print cname
+    print(cname)
 
 
 # Sec13; Residues (1), (159-165), (297) are missing in PDB
@@ -274,7 +275,7 @@ simo.setup_component_sequence_connectivity("Sec13", res_cry)
 ## or starts from scratch
 #####################################################
 if inputs.rmf_input:
-    print "Reading coordinates from", inputs.rmf_input, inputs.frame_number
+    print("Reading coordinates from", inputs.rmf_input, inputs.frame_number)
     simo.link_components_to_rmf(inputs.rmf_input, inputs.frame_number)
 
 simo.set_rigid_bodies([("SEA1",(101,275))])
@@ -364,7 +365,7 @@ if (inputs.draw_hierarchy):
     simo.show_component_table("Sec13")
 
     d = simo.get_particles_to_sample()
-    print d
+    print(d)
 
 #simo.set_output_level("high")
 
@@ -386,7 +387,7 @@ ev.add_to_model()
 outputobjects.append(ev)
 partialscore1.append(ev)
 #partialscore2.append(ev)
-print "ExcludedVolumeSphere !!"
+print("ExcludedVolumeSphere !!")
 
 
 #####################################################
@@ -407,7 +408,7 @@ if inputs.ncopy == 3:
         crd["SEA3_dSEA3:910-1148_P"]=["SEA1","Npr2","Npr3",(1,909,"SEA3"),"Sec13"]
         crd["SEA4_dSEA3_P"]=["SEA4.1","SEA4.2","SEA4.3","Seh1.1","Seh1.2","Seh1.3","SEA2"]
         crd["SEA4_dSEA3_P2"]=["SEA4.1","SEA4.2","SEA4.3","Seh1.1","Seh1.2","Seh1.3"]
-        print "All composite restraints !! with weight =", weight
+        print("All composite restraints !! with weight =", weight)
 else:
     crd["Npr2_dNpr2_497_615_P"]=[(1,496,"Npr2"),"Npr3"]
     if (inputs.refinement):
@@ -421,7 +422,7 @@ else:
         crd["SEA4_dSEA3_P"]=["SEA4","Seh1","SEA2"]
         crd["SEA4_dSEA3_P2"]=["SEA4","Seh1"]
         crd["SEA4_dSEA4:931-1038_P"]=[(1,930,"SEA4"),"Seh1"]
-        print "All composite restraints !! with weight =", weight
+        print("All composite restraints !! with weight =", weight)
 
 for key in crd:
     cr=IMP.pmi.restraints.proteomics.ConnectivityRestraint(
@@ -432,9 +433,9 @@ for key in crd:
     partialscore1.append(cr)
     partialscore2.append(cr)
     outputobjects.append(cr)
-    print key, crd[key]
+    print(key, crd[key])
 
-print "Composite Restraint !! with weight =", weight
+print("Composite Restraint !! with weight =", weight)
 
 
 #####################################################
@@ -455,8 +456,8 @@ xl.add_to_model()
 outputobjects.append(xl)
 partialscore1.append(xl)
 partialscore2.append(xl)
-print "Cross-Links !!"
-print inputs
+print("Cross-Links !!")
+print(inputs)
 
 #####################################################
 # GaussianEMRestraint
@@ -497,7 +498,7 @@ output.init_stat2(inputs.stat_output, outputobjects, extralabels=["rmf_file","rm
 # RMF split
 rmf_nframes = 500
 nrmf_files = int( inputs.nrepeats / rmf_nframes )
-print "nrmf_files = ", nrmf_files
+print("nrmf_files = ", nrmf_files)
 
 for k in range(nrmf_files):
     if (inputs.rmf_output == "models.rmf"):
@@ -509,7 +510,7 @@ for k in range(nrmf_files):
 
     for i in range(rmf_nframes):
         mc.optimize(ncycl)
-        print mc.get_frame_number()+1
+        print(mc.get_frame_number()+1)
         #print mc.get_frame_number()+1, ":", rmf_file, i
         output.set_output_entry("rmf_file", rmf_file)
         output.set_output_entry("rmf_frame_index", i)
