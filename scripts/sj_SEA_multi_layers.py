@@ -508,7 +508,7 @@ for k in range(nrmf_files):
     #output.write_rmfs(0)
 
     for i in range(rmf_nframes):
-        mc.run(ncycl)
+        mc.optimize(ncycl)
         print mc.get_frame_number()+1
         #print mc.get_frame_number()+1, ":", rmf_file, i
         output.set_output_entry("rmf_file", rmf_file)
