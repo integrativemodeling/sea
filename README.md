@@ -1,9 +1,9 @@
 These scripts demonstrate the use of [IMP](https://integrativemodeling.org/),
 [MODELLER](https://salilab.org/modeller), and
-[PMI](https://github.com/salilab/pmi) in the modeling of the SEA complex using 188 DSS chemical cross-links and 23 affinity purification data.
+[PMI](https://github.com/salilab/pmi) in the modeling of the SEA complex using 188 DSS chemical cross-links and 23 composites from affinity purification.
 
 First, [MODELLER](https://salilab.org/modeller) is used to generate
-initial structures for the individual components where reliable templates are available. Then, [IMP](https://integrativemodeling.org/) / [PMI](https://github.com/salilab/pmi) are used to model these components using the DSS/EDC crosslinks and the affinity purification data for the entire SEA complex.
+initial structures for the individual components where reliable templates are available. Then, [IMP](https://integrativemodeling.org/) / [PMI](https://github.com/salilab/pmi) are used to model these components using the DSS crosslinks and the affinity purification data for the entire SEA complex.
 
 The scripts work with the 65734ec version (develop branch) of [IMP](https://integrativemodeling.org/) and the 47dafcc version (develop branch) of [PMI](https://github.com/salilab/pmi).
 
