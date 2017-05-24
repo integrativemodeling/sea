@@ -147,8 +147,6 @@ ds=[(521,563),\
     (1156,1217),(1218,1279)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
 simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_1280-1341.pdb', "A", resolutions=res, color=tmp_color)
 simo.setup_component_sequence_connectivity("SEA2", res_cry)
-#simo.set_uncertianty(5,("SEA2",100,110),resolution=1)
-
 
 # SEA3
 tmp_color=0.0
@@ -345,7 +343,6 @@ if not inputs.rmf_input:
 
 if (inputs.draw_hierarchy):
     simo.draw_hierarchy_composition()
-    #simo.draw_hierarchy_graph()
 
     simo.show_component_table("SEA1")
     simo.show_component_table("SEA2")
@@ -367,9 +364,6 @@ if (inputs.draw_hierarchy):
     d = simo.get_particles_to_sample()
     print(d)
 
-#simo.set_output_level("high")
-
-#expl=simo.get_connected_intra_pairs()
 outputobjects.append(simo)
 sampleobjects.append(simo)
 partialscore1.append(simo)
@@ -381,12 +375,9 @@ partialscore2.append(simo)
 # Excluded Volume restraint
 #####################################################
 ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution=res_ev)
-#ev.add_excluded_particle_pairs(expl)
 ev.add_to_model()
-#ev.set_weight(0.1)
 outputobjects.append(ev)
 partialscore1.append(ev)
-#partialscore2.append(ev)
 print("ExcludedVolumeSphere !!")
 
 
@@ -442,17 +433,11 @@ print("Composite Restraint !! with weight =", weight)
 # Cross-link restraint
 # sample format: "ssl1 ssl1 196 200"
 #####################################################
-#res_XL = res_cry + 1.0
 res_XL = res_cry
 xl = IMP.pmi.restraints.crosslinking.ConnectivityCrossLinkMS(
                     simo, inputs.XL_input, expdistance=17., resolution=res_XL)
-#xl = restraints.ConnectivityCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2, resolution=res_XL)
-#xl = restraints.SimplifiedCrossLinkMS(simo, inputs.XL_input, expdistance=17., strength=0.2)
-#xl = restraints.SigmoidCrossLinkMS(simo, inputs.XL_input, inflection=25., slope=1.0, amplitude=1.0, resolution=res_XL)
-#xl.plot_restraint(uncertainty1=4.95, uncertainty2=6.25, maxdist=100)
 
 xl.add_to_model()
-#xl.set_weight(0.1)
 outputobjects.append(xl)
 partialscore1.append(xl)
 partialscore2.append(xl)
@@ -472,25 +457,15 @@ mc = samplers.MonteCarlo(m,sampleobjects, 0.5)
 mc.set_simulated_annealing(0.5, 10.0, 100, 50)
 outputobjects.append(mc)
 
-#cg=samplers.ConjugateGradients(m,sampleobjects)
-#outputobjects.append(cg)
-
 sw = tools.Stopwatch()
 outputobjects.append(sw)
 
 output = output.Output()
-#output.init_rmf(inputs.rmf_output, simo.prot)
-#output.add_restraints_to_rmf("models.rmf",[xl])
 
 #the fields rmf_file and rmf_frame_index will be printed into the
 #stat file, so that you'll keep track of the rmffile and the frame
 #corresponding to that entry in the stat file
 output.init_stat2(inputs.stat_output, outputobjects, extralabels=["rmf_file","rmf_frame_index"], listofsummedobjects=[(partialscore1,"PartialScore1"),(partialscore2,"PartialScore2")])
-#output.init_stat2(inputs.stat_output, outputobjects, listofsummedobjects=[(partialscore1,"PartialScore1"),(partialscore2,"PartialScore2")])
-
-#output.add_particle_pair_from_restraints_to_rmf("models.rmf",[xl])
-#output.write_rmfs(0)
-
 
 #####################################################
 #running simulation
@@ -506,27 +481,13 @@ for k in range(nrmf_files):
     else:
         rmf_file="REFINED_models."+str(k)+".rmf"
     output.init_rmf(rmf_file, hierarchies=[simo.prot])
-    #output.write_rmfs(0)
 
     for i in range(rmf_nframes):
         mc.optimize(ncycl)
         print(mc.get_frame_number()+1)
-        #print mc.get_frame_number()+1, ":", rmf_file, i
         output.set_output_entry("rmf_file", rmf_file)
         output.set_output_entry("rmf_frame_index", i)
         output.write_stats2()
-        #output.write_rmf(rmf_file, i)
         output.write_rmf(rmf_file)
 
     output.close_rmf(rmf_file)
-
-
-"""
-#cg.run(ncycl/10)
-for i in range(inputs.nrepeats):
-    #cg.run(2)
-    mc.run(ncycl)
-    print mc.get_frame_number()+1
-    output.write_stats2()
-    output.write_rmfs(mc.get_frame_number()+1)
-"""
