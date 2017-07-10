@@ -3,6 +3,7 @@ from modeller.automodel import *
 from modeller.scripts import complete_pdb
 import fnmatch
 import os
+import sys
 #import pylab
 
 log.verbose()
@@ -127,7 +128,8 @@ a = MyModel(env,
               assess_methods=(assess.DOPE, assess.GA341))
             
 a.starting_model= 1                 # index of the first model
-a.ending_model  = 200               # index of the last model
+a.ending_model = 1 if '--test' in sys.argv else 200
+                                    # index of the last model
                                     # (determines how many models to calculate)
 a.make()                            # do homology modeling
 
