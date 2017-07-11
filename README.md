@@ -64,17 +64,18 @@ A full description of the scripts can be found in
 ## Running the IMP/PMI scripts for the SEA complex:
 
 To produce a single model with 1:3 stoichiometry and rotational
-symmetry, as in the publication, use the `run_qsub.sh` script:
+symmetry, as in the publication, use the `run_qsub.sh` script in the `scripts`
+directory:
 
-    run_qsub.sh 50000 20000 3 True
-
-For the publication, this script was run 885 times to generate the final
-ensemble, which was then clustered to produce the 340 models in the `output`
-directory.
+    ./run_qsub.sh 50000 20000 3 True
 
 This script in turn runs `scripts/sj_SEA_multi_layers.py`, which if desired
 can be run with different options to explore other representations and sampling
 options.
+
+For the publication, this script was run 885 times to generate the final
+ensemble, which was then clustered to produce the 340 models in the `output`
+directory.
 
 ## Information
 
