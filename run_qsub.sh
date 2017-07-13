@@ -98,7 +98,7 @@ else
 fi
 
 $PROCESS_RUN -f $FILE2 -s ConnectivityCrossLinkMS_Score_None ExcludedVolumeSphere_None SimplifiedModel_Total_Score_None PartialScore1 PartialScore2 > output.log
-export NUMOFLINES=$(expr $(cat output.log | wc -l) - 1)
+export NUMOFLINES=$(( $(wc -l < output.log) - 1 ))
 
 if [ $NUMOFLINES -lt 1 ]; then
     echo NUMOFLINES = $NUMOFLINES
@@ -114,19 +114,19 @@ echo "========================================================================"
 # Retrieving the best scoring frame from the INITIAL Monte Carlo job
 ############################################################################
 if [ $FLAG_RMF_SLICE -eq 1 ]; then
-    export NUMOFLINES=$(expr $(cat output.log | wc -l) - 1)
+    export NUMOFLINES=$(( $(wc -l < output.log) - 1 ))
     echo "Processing $NUMOFLINES cycles from the previous run"
 
     FRAME=$(awk '{if (NR == ENVIRON["NUMOFLINES"]) print $2}' output_PS2_sorted.log)
     if [ $FRAME == "#" ]; then
-        export NUMOFLINES=$(expr $(cat output.log | wc -l))
+        export NUMOFLINES=$(wc -l < output.log)
         FRAME=$(awk '{if (NR == ENVIRON["NUMOFLINES"]) print $2}' output_PS2_sorted.log)
     fi
     echo "The best scoring FRAME by (XL + minimal domain mapping data) : $FRAME"
     awk '{if (NR == ENVIRON["NUMOFLINES"]) print $1, $2, $3, $4, $5, $6, $7, $8}' output_PS2_sorted.log
 
-    RMF_NO=$(expr $( expr $FRAME - 1 ) / $RMF_NFRAMES)
-    RMF_FRAME=$(expr $( expr $FRAME - 1 ) % $RMF_NFRAMES)
+    RMF_NO=$(( ( $FRAME - 1 ) / $RMF_NFRAMES ))
+    RMF_FRAME=$(( ( $FRAME - 1 ) % $RMF_NFRAMES ))
     RMF_FILE="models.$RMF_NO.rmf"
 
     rmf_slice $RMF_FILE models_$FRAME.rmf -f $RMF_FRAME -s 1000000
@@ -162,19 +162,19 @@ if [ $FLAG_REFINE -eq 1 ]; then
     # Retrieving the best scoring frame from the REFINEMENT Monte Carlo job
     ############################################################################
     if [ $FLAG_RMF_SLICE -eq 1 ]; then
-        export NUMOFLINES=$(expr $(cat REFINED_output.log | wc -l) - 1)
+        export NUMOFLINES=$(( $(wc -l < REFINED_output.log) - 1 ))
         echo "Processing $NUMOFLINES cycles from the previous run"
 
         FRAME_REFINED=$(awk '{if (NR == ENVIRON["NUMOFLINES"]) print $2}' REFINED_output_PS2_sorted.log)
         if [ $FRAME_REFINED == "#" ]; then
-            export NUMOFLINES=$(expr $(cat REFINED_output.log | wc -l))
+            export NUMOFLINES=$(wc -l < REFINED_output.log)
             FRAME_REFINED=$(awk '{if (NR == ENVIRON["NUMOFLINES"]) print $2}' REFINED_output_PS2_sorted.log)
         fi
         echo "The best scoring FRAME by (XL + all domain mapping) data : $FRAME_REFINED"
         awk '{if (NR == ENVIRON["NUMOFLINES"]) print $1, $2, $3, $4, $5, $6, $7, $8}' REFINED_output_PS2_sorted.log
 
-        RMF_NO=$(expr $( expr $FRAME_REFINED - 1 ) / $RMF_NFRAMES)
-        RMF_FRAME=$(expr $( expr $FRAME_REFINED - 1 ) % $RMF_NFRAMES)
+        RMF_NO=$(( ( $FRAME_REFINED - 1 ) / $RMF_NFRAMES ))
+        RMF_FRAME=$(( ( $FRAME_REFINED - 1 ) % $RMF_NFRAMES ))
         RMF_FILE="REFINED_models.$RMF_NO.rmf"
 
         rmf_slice $RMF_FILE REFINED_models_${FRAME_REFINED}.rmf -f $RMF_FRAME -s 1000000
