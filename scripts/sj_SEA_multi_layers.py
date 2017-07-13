@@ -272,14 +272,6 @@ ds=[(297,297)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("Sec13", res_cry)
 
 
-#####################################################
-## Read the coordinates from the previous runs,
-## or starts from scratch
-#####################################################
-if inputs.rmf_input:
-    print("Reading coordinates from", inputs.rmf_input, inputs.frame_number)
-    simo.link_components_to_rmf(inputs.rmf_input, inputs.frame_number)
-
 simo.set_rigid_bodies([("SEA1",(101,275))])
 simo.set_rigid_bodies([("SEA1",(279,473))])
 simo.set_rigid_bodies([("SEA1",(1178,1273))])
@@ -336,6 +328,12 @@ for rt in ['SEA4.2', 'SEA4.3', 'Seh1.2', 'Seh1.3']:
     hs = IMP.pmi.tools.select_by_tuple(simo, rt)
     simo.remove_floppy_bodies(hs)
 
+#####################################################
+## Read the coordinates from the previous run
+#####################################################
+if inputs.rmf_input:
+    print("Reading coordinates from", inputs.rmf_input, inputs.frame_number)
+    simo.link_components_to_rmf(inputs.rmf_input, inputs.frame_number)
 
 #####################################################
 # randomize the initial configuration
