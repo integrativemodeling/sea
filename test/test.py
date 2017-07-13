@@ -5,10 +5,20 @@ import os
 import sys
 import subprocess
 import glob
+import shutil
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
 class Tests(unittest.TestCase):
+    def test_one_model(self):
+        """Test generation of a single model"""
+        os.chdir(TOPDIR)
+        shutil.rmtree('test-output', ignore_errors=True)
+        os.mkdir('test-output')
+        os.chdir('test-output')
+        p = subprocess.check_call(["../run_qsub.sh", "500", "500", "3", "True"])
+        # todo: check outputs
+
     def run_modeller_script(self, script_dir, script_name, model_name, resrng):
         """Run a Modeller script and test the output model"""
         os.chdir(os.path.join(TOPDIR, 'scripts', 'MODELLER', script_dir))
