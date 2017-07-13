@@ -27,10 +27,8 @@ echo
 #module load imp
 
 RMF_NFRAMES=500
-#FLAG_RMF_SLICE=1
-FLAG_RMF_SLICE=0
-#FLAG_REFINE=1
-FLAG_REFINE=0
+FLAG_RMF_SLICE=1
+FLAG_REFINE=1
 IMP_RUN="python ../scripts/sj_SEA_multi_layers.py"
 PROCESS_RUN="../scripts/process_output_sj.py"
 FILE1="models.rmf"
