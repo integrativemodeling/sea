@@ -19,6 +19,10 @@
 ##$ -t 1-1000                        #-- specify the number of tasks
 
 #usage : run_qsub.sh REPEAT1 REPEAT2 N_COPY SYMMETRY
+
+# Exit immediately on error
+set -e
+
 date
 hostname
 echo
