@@ -20,6 +20,8 @@ import IMP.pmi.tools as tools
 import IMP.pmi.output as output
 import IMP.pmi.samplers as samplers
 import random
+import sys
+import os
 
 ncycl = 100         #number of Monte Carlo steps per cycle
 rbmaxtrans = 1.50
@@ -30,6 +32,8 @@ sampleobjects = []
 partialscore1 = []
 partialscore2 = []
 
+# Directory containing this script
+topdir = os.path.dirname(sys.argv[0])
 
 #####################################################
 # Parsing parameter inputs
@@ -114,18 +118,18 @@ print("resolutions for the crystal structures = ", res2)
 tmp_color=0.5
 simo.create_component("SEA1")
 ds=[(1,50),(51,100)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA1", 'MODELLER/SEA1/SEA1_101-275.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("SEA1", '%s/MODELLER/SEA1/SEA1_101-275.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(276,278)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA1", 'MODELLER/SEA1/SEA1_279-473.pdb', "A", resolutions=res, color=tmp_color, resrange=(279,331))
+simo.add_component_pdb("SEA1", '%s/MODELLER/SEA1/SEA1_279-473.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(279,331))
 ds=[(332,343)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA1", 'MODELLER/SEA1/SEA1_279-473.pdb', "A", resolutions=res, color=tmp_color, resrange=(344,376))
+simo.add_component_pdb("SEA1", '%s/MODELLER/SEA1/SEA1_279-473.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(344,376))
 ds=[(377,399)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA1", 'MODELLER/SEA1/SEA1_279-473.pdb', "A", resolutions=res, color=tmp_color, resrange=(400,473))
+simo.add_component_pdb("SEA1", '%s/MODELLER/SEA1/SEA1_279-473.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(400,473))
 ds=[(474,526),\
     (527,609),(610,692),(693,775),(776,859),\
     (860,948),(949,1037),(1038,1126),\
     (1127,1177)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA1", 'MODELLER/SEA1/SEA1_1178-1273.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("SEA1", '%s/MODELLER/SEA1/SEA1_1178-1273.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(1274,1340),\
     (1341,1421),(1422,1502),(1503,1584)]; simo.add_component_beads("SEA1", ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("SEA1", res_cry)
@@ -135,37 +139,37 @@ simo.setup_component_sequence_connectivity("SEA1", res_cry)
 tmp_color=0.7
 simo.create_component("SEA2")
 ds=[(1,63),(64,126)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_127-520.pdb', "A", resolutions=res, color=tmp_color, resrange=(127,172))
+simo.add_component_pdb("SEA2",'%s/MODELLER/SEA2/SEA2_127-520.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(127,172))
 ds=[(173,200)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_127-520.pdb', "A", resolutions=res, color=tmp_color, resrange=(201,319))
+simo.add_component_pdb("SEA2",'%s/MODELLER/SEA2/SEA2_127-520.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(201,319))
 ds=[(320,337)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_127-520.pdb', "A", resolutions=res, color=tmp_color, resrange=(338,403))
+simo.add_component_pdb("SEA2",'%s/MODELLER/SEA2/SEA2_127-520.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(338,403))
 ds=[(404,433)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_127-520.pdb', "A", resolutions=res, color=tmp_color, resrange=(434,520))
+simo.add_component_pdb("SEA2",'%s/MODELLER/SEA2/SEA2_127-520.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(434,520))
 ds=[(521,563),\
     (564,662),(663,761),(762,860),(861,959),(960,1058),(1059,1155),\
     (1156,1217),(1218,1279)]; simo.add_component_beads("SEA2", ds,colors=[tmp_color])
-simo.add_component_pdb("SEA2",'MODELLER/SEA2/SEA2_1280-1341.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("SEA2",'%s/MODELLER/SEA2/SEA2_1280-1341.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 simo.setup_component_sequence_connectivity("SEA2", res_cry)
 
 # SEA3
 tmp_color=0.0
 simo.create_component("SEA3")
 ds=[(1,53)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_54-424.pdb', "A", resolutions=res, color=tmp_color, resrange=(54,278))
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_54-424.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(54,278))
 ds=[(279,289)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_54-424.pdb', "A", resolutions=res, color=tmp_color, resrange=(290,314))
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_54-424.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(290,314))
 ds=[(315,324)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_54-424.pdb', "A", resolutions=res, color=tmp_color, resrange=(325,344))
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_54-424.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(325,344))
 ds=[(345,389)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_54-424.pdb', "A", resolutions=res, color=tmp_color, resrange=(390,424))
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_54-424.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(390,424))
 ds=[(425,429)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_430-536.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_430-536.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(537,615),(616,694),(695,772),\
     (773,825),(826,878),\
     (879,937),(938,995),\
     (996,1091)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
-simo.add_component_pdb("SEA3",'MODELLER/SEA3/SEA3_1092_1139.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("SEA3",'%s/MODELLER/SEA3/SEA3_1092_1139.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(1140,1148)]; simo.add_component_beads("SEA3",ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("SEA3", res_cry)
 
@@ -180,25 +184,25 @@ else:
 for cname in cnames:
     simo.create_component(cname)
     ds=[(1,44)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(45,87))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_45-426.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(45,87))
     ds=[(88,123)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(124,130))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_45-426.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(124,130))
     ds=[(131,148)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(149,272))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_45-426.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(149,272))
     ds=[(273,284)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(285,333))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_45-426.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(285,333))
     ds=[(334,355)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_45-426.pdb', "A", resolutions=res, color=tmp_color, resrange=(356,426))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_45-426.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(356,426))
     ds=[(427,490),\
         (491,574),(575,658)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(659,782))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_659-835.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(659,782))
     ds=[(783,808)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_659-835.pdb', "A", resolutions=res, color=tmp_color, resrange=(809,835))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_659-835.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(809,835))
     ds=[(836,888),\
         (889,941)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_942-1032.pdb', "A", resolutions=res, color=tmp_color, resrange=(942,963))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_942-1032.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(942,963))
     ds=[(964,999)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'MODELLER/SEA4/SEA4_942-1032.pdb', "A", resolutions=res, color=tmp_color, resrange=(1000,1032))
+    simo.add_component_pdb(cname,'%s/MODELLER/SEA4/SEA4_942-1032.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(1000,1032))
     ds=[(1033,1038)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     if not (inputs.symmetry) or (cname=="SEA4.1"):
         simo.setup_component_sequence_connectivity(cname, res_cry)
@@ -209,14 +213,14 @@ for cname in cnames:
 tmp_color=0.8
 simo.create_component("Npr2")
 ds=[(1,8)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr2",'MODELLER/Npr2/Npr2_9-127.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr2",'%s/MODELLER/Npr2/Npr2_9-127.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(128,192),(193,256)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr2",'MODELLER/Npr2/Npr2_257-327.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr2",'%s/MODELLER/Npr2/Npr2_257-327.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(328,355),\
     (356,430),\
     (431,493),\
     (494,562)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr2",'MODELLER/Npr2/Npr2_563-610.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr2",'%s/MODELLER/Npr2/Npr2_563-610.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(611,615)]; simo.add_component_beads("Npr2",ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("Npr2", res_cry)
 
@@ -224,17 +228,17 @@ simo.setup_component_sequence_connectivity("Npr2", res_cry)
 # Npr3
 tmp_color=0.87
 simo.create_component("Npr3")
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_1-31.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_1-31.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(32,128),(129,225),(226,321)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_322-438.pdb', "A", resolutions=res, color=tmp_color, resrange=(322,351))
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_322-438.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(322,351))
 ds=[(352,399)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_322-438.pdb', "A", resolutions=res, color=tmp_color, resrange=(400,438))
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_322-438.pdb' % topdir, "A", resolutions=res, color=tmp_color, resrange=(400,438))
 ds=[(439,530)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_531-577.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_531-577.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(578,670),(671,763),(764,856),(857,949)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_950-988.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_950-988.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(989,1082)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
-simo.add_component_pdb("Npr3",'MODELLER/Npr3/Npr3_1083-1140.pdb', "A", resolutions=res, color=tmp_color)
+simo.add_component_pdb("Npr3",'%s/MODELLER/Npr3/Npr3_1083-1140.pdb' % topdir, "A", resolutions=res, color=tmp_color)
 ds=[(1141,1146)]; simo.add_component_beads("Npr3",ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("Npr3", res_cry)
 
@@ -248,9 +252,9 @@ else:
     cnames=["Seh1"]
 for cname in cnames:
     simo.create_component(cname)
-    simo.add_component_pdb(cname,'../pdb/3F3F.pdb', "A", resolutions=res2, color=tmp_color, resrange=(1,248))
+    simo.add_component_pdb(cname,'%s/../pdb/3F3F.pdb' % topdir, "A", resolutions=res2, color=tmp_color, resrange=(1,248))
     ds=[(249,287)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
-    simo.add_component_pdb(cname,'../pdb/3F3F.pdb', "A", resolutions=res2, color=tmp_color, resrange=(288,346))
+    simo.add_component_pdb(cname,'%s/../pdb/3F3F.pdb' % topdir, "A", resolutions=res2, color=tmp_color, resrange=(288,346))
     ds=[(347,349)]; simo.add_component_beads(cname,ds,colors=[tmp_color])
     if not (inputs.symmetry) or (cname=="Seh1.1"):
         simo.setup_component_sequence_connectivity(cname, res_cry)
@@ -261,9 +265,9 @@ for cname in cnames:
 tmp_color=0.3
 simo.create_component("Sec13")
 ds=[(1,1)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
-simo.add_component_pdb("Sec13",'../pdb/2PM7.pdb', "D", resolutions=res2, color=tmp_color, resrange=(2,158))
+simo.add_component_pdb("Sec13",'%s/../pdb/2PM7.pdb' % topdir, "D", resolutions=res2, color=tmp_color, resrange=(2,158))
 ds=[(159,165)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
-simo.add_component_pdb("Sec13",'../pdb/2PM7.pdb', "D", resolutions=res2, color=tmp_color, resrange=(166,296))
+simo.add_component_pdb("Sec13",'%s/../pdb/2PM7.pdb' % topdir, "D", resolutions=res2, color=tmp_color, resrange=(166,296))
 ds=[(297,297)]; simo.add_component_beads("Sec13",ds,colors=[tmp_color])
 simo.setup_component_sequence_connectivity("Sec13", res_cry)
 
