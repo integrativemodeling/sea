@@ -6,10 +6,27 @@ import sys
 import subprocess
 import glob
 import shutil
+import re
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
 class Tests(unittest.TestCase):
+
+    def _get_best_model_num(self, fname):
+        """Extract the frame number of the best model from the log file"""
+        with open(fname) as fh:
+            lines = fh.readlines()
+        return int(lines[-2].split()[1])
+
+    def _check_rmf_topology(self, fname):
+        """Check the RMF file to make sure it matches the expected topology"""
+        p = subprocess.Popen(["rmf_show", fname], stdout=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        comps = re.findall('^     \+ "([^"]+)"', stdout, re.M)
+        self.assertEqual(comps, ['SEA1', 'SEA2', 'SEA3', 'SEA4.1', 'SEA4.2',
+                                 'SEA4.3', 'Npr2', 'Npr3', 'Seh1.1',
+                                 'Seh1.2', 'Seh1.3', 'Sec13'])
+
     def test_one_model(self):
         """Test generation of a single model"""
         os.chdir(TOPDIR)
@@ -17,7 +34,21 @@ class Tests(unittest.TestCase):
         os.mkdir('test-output')
         os.chdir('test-output')
         p = subprocess.check_call(["../run_qsub.sh", "500", "500", "3", "True"])
-        # todo: check outputs
+        # Make sure expected files were produced
+        for fname in ('output_XL_sorted.log', 'REFINED_output_PS2_sorted.log',
+                      'models.rmf.tar.gz', 'REFINED_output_XL_sorted.log',
+                      'output.log', 'REFINED_models.rmf.tar.gz',
+                      'REFINED_stat.dat.tar.gz', 'output_PS2_sorted.log',
+                      'REFINED_output.log', 'stat.dat.tar.gz'):
+            self.assertTrue(os.path.exists(fname))
+
+        # Check that best initial and refined model were produced, and match
+        # the expected topology
+        num = self._get_best_model_num('output_PS2_sorted.log')
+        self._check_rmf_topology('models_%d.rmf' % num)
+
+        num = self._get_best_model_num('REFINED_output_PS2_sorted.log')
+        self._check_rmf_topology('REFINED_models_%d.rmf' % num)
 
     def run_modeller_script(self, script_dir, script_name, model_name, resrng):
         """Run a Modeller script and test the output model"""
