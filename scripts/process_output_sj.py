@@ -22,24 +22,24 @@ isstat2=False
 
 #open the file
 if result.filename!=None:
-   f=open(result.filename,"r")
+    f=open(result.filename,"r")
 else:
-   print("Error: No file name provided. Use -h for help")
-   exit()
+    print("Error: No file name provided. Use -h for help")
+    exit()
 
 #get the keys from the first line
 for line in f.readlines():
     d=eval(line)
     klist=d.keys()
     #check if it is a stat2 file
-    if "STAT2HEADER" in klist: 
+    if "STAT2HEADER" in klist:
         import operator
         isstat2=True
         for k in klist:
             if "STAT2HEADER" in str(k):
-               if result.print_header:
-                   print(k, d[k])
-               del d[k]
+                if result.print_header:
+                    print(k, d[k])
+                del d[k]
         stat2_dict=d
         #get the list of keys sorted by value
         kkeys=[k[0] for k in sorted(stat2_dict.iteritems(), key=operator.itemgetter(1))]
@@ -50,13 +50,13 @@ for line in f.readlines():
     else:
         isstat1=True
         klist.sort()
-        
+
     break
-f.close()    
-    
-#print the keys    
-if result.print_fields:    
-     for key in klist:
+f.close()
+
+#print the keys
+if result.print_fields:
+    for key in klist:
         print(key)
 
 
@@ -66,121 +66,118 @@ if result.soft_match: match_strictness=0.1
 
 #print the queried fields
 if result.fields!=None:
-   field_list=[]
-   #check whether the fields exist and convert them to best maching existing field names
-   for field in result.fields:
-      found_entries=difflib.get_close_matches(field,klist,1,match_strictness)
-      if len(found_entries)==0:
-         print("Error: field "+field+" non found")
-         exit()
-      else:
-         field_list.append(found_entries[0])
-   
-   #print comment line   
-   s0=' '.join(["%20s" % (field) for field in field_list])
-   print("# "+s0)
-   
-   #print fields values
-   f=open(result.filename,"r")
-   line_number=0
-   for line in f.readlines():
-      line_number+=1
-      try:
-         d=eval(line)
-      except:
-         print("# Warning: skipped line number " + str(line_number) + " not a valid line")
-         continue
-      if   isstat1: s0=' '.join(["%20s" % (str(d[field])) for field in field_list])
-      elif isstat2: 
-           if line_number==1: continue
-           s0=' '.join(["%20s" % (str(d[invstat2_dict[field]])) for field in field_list])
-      # by SJ
-      #print "> "+s0
-      print(line_number-1, " > "+s0)
-   f.close()
+    field_list=[]
+    #check whether the fields exist and convert them to best maching existing field names
+    for field in result.fields:
+        found_entries=difflib.get_close_matches(field,klist,1,match_strictness)
+        if len(found_entries)==0:
+            print("Error: field "+field+" non found")
+            exit()
+        else:
+            field_list.append(found_entries[0])
+
+    #print comment line
+    s0=' '.join(["%20s" % (field) for field in field_list])
+    print("# "+s0)
+
+    #print fields values
+    f=open(result.filename,"r")
+    line_number=0
+    for line in f.readlines():
+        line_number+=1
+        try:
+            d=eval(line)
+        except:
+            print("# Warning: skipped line number " + str(line_number) + " not a valid line")
+            continue
+        if   isstat1: s0=' '.join(["%20s" % (str(d[field])) for field in field_list])
+        elif isstat2:
+            if line_number==1: continue
+            s0=' '.join(["%20s" % (str(d[invstat2_dict[field]])) for field in field_list])
+        # by SJ
+        #print "> "+s0
+        print(line_number-1, " > "+s0)
+    f.close()
 
 
 if result.single_column_field!=None:
-   field_list=[]
-   for k in klist:
-       if result.single_column_field in k:
-           field_list.append(k)
-              
-   f=open(result.filename,"r")
-   line_number=0
-   for line in f.readlines():
-      line_number+=1   
-      try:
-         d=eval(line)
-      except:
-         print("# Warning: skipped line number " + str(line_number) + " not a valid line")
-         continue   
-      if isstat1:   
-         for key in field_list:
-             print(key, d[key])
-      elif isstat2:
-         if line_number==1: continue
-         for key in field_list:
-             print(key, d[invstat2_dict[key]])
-      print(" ")
-   f.close()      
+    field_list=[]
+    for k in klist:
+        if result.single_column_field in k:
+            field_list.append(k)
+
+    f=open(result.filename,"r")
+    line_number=0
+    for line in f.readlines():
+        line_number+=1
+        try:
+            d=eval(line)
+        except:
+            print("# Warning: skipped line number " + str(line_number) + " not a valid line")
+            continue
+        if isstat1:
+            for key in field_list:
+                print(key, d[key])
+        elif isstat2:
+            if line_number==1: continue
+            for key in field_list:
+                print(key, d[invstat2_dict[key]])
+        print(" ")
+    f.close()
 
 if (result.search_field!=None and result.search_value!=None):
-   #check whether the fields exist and convert them to best maching existing field names
-   found_entries=difflib.get_close_matches(result.search_field,klist,1,match_strictness)
-   if len(found_entries)==0:
-       print("Error: field "+results.search_field+" non found")
-       exit()
-   else:
-       corrected_field=found_entries[0]
-   #print fields values
-   f=open(result.filename,"r")
-   line_number=0
-   for line in f.readlines():
-      line_number+=1
-      try:
-         d=eval(line)
-      except:
-         print("# Warning: skipped line number " + str(line_number) + " not a valid line")
-         continue
-         
-      if isstat1:
-        if (str(d[corrected_field])==result.search_value):
-           for key in klist:
-             print(key, d[key])
-      elif isstat2:
-        if linenumber==1: continue
-        if (str(d[invstat2_dict[corrected_field]])==result.search_value):
-           for key in klist:
-             print(key, d[invstat2_dict[key]])
-   f.close()
+    #check whether the fields exist and convert them to best maching existing field names
+    found_entries=difflib.get_close_matches(result.search_field,klist,1,match_strictness)
+    if len(found_entries)==0:
+        print("Error: field "+results.search_field+" non found")
+        exit()
+    else:
+        corrected_field=found_entries[0]
+    #print fields values
+    f=open(result.filename,"r")
+    line_number=0
+    for line in f.readlines():
+        line_number+=1
+        try:
+            d=eval(line)
+        except:
+            print("# Warning: skipped line number " + str(line_number) + " not a valid line")
+            continue
+
+        if isstat1:
+            if (str(d[corrected_field])==result.search_value):
+                for key in klist:
+                    print(key, d[key])
+        elif isstat2:
+            if linenumber==1: continue
+            if (str(d[invstat2_dict[corrected_field]])==result.search_value):
+                for key in klist:
+                    print(key, d[invstat2_dict[key]])
+    f.close()
 
 if (result.print_raw_number!=None):
-   #check whether the fields exist and convert them to best maching existing field names
-   f=open(result.filename,"r")
-   line_number=0
-   for line in f.readlines():
-      line_number+=1
-      if isstat1:
-       if (line_number==int(result.print_raw_number)):
-         try:
-           d=eval(line)
-         except:
-           print("# Warning: skipped line number " + str(line_number) + " not a valid line")
-           break
-         for key in klist:
-            print(key, d[key])
+    #check whether the fields exist and convert them to best maching existing field names
+    f=open(result.filename,"r")
+    line_number=0
+    for line in f.readlines():
+        line_number+=1
+        if isstat1:
+            if (line_number==int(result.print_raw_number)):
+                try:
+                    d=eval(line)
+                except:
+                    print("# Warning: skipped line number " + str(line_number) + " not a valid line")
+                    break
+                for key in klist:
+                    print(key, d[key])
 
-      elif isstat2:
-       if (line_number==int(result.print_raw_number)+1):
-         try:
-           d=eval(line)
-         except:
-           print("# Warning: skipped line number " + str(line_number) + " not a valid line")
-           break
-         for key in klist:
-            print(key, d[invstat2_dict[key]])
-   f.close()
-       
-
-
+        elif isstat2:
+            if (line_number==int(result.print_raw_number)+1):
+                try:
+                    d=eval(line)
+                except:
+                    print("# Warning: skipped line number " + str(line_number) + " not a valid line")
+                    break
+                for key in klist:
+                    print(key, d[invstat2_dict[key]])
+    f.close()
