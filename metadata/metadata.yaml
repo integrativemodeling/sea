@@ -1,7 +1,7 @@
 title: SEA Complex
 tags: [MODELLER, PMI, chemical crosslinks, affinity purification]
 pmid: 25073740
-prereqs: []
+prereqs: [modeller]
 test:
     runtime: 24h
     build: release
