@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.836910.svg)](https://doi.org/10.5281/zenodo.836910)
+
 These scripts demonstrate the use of [IMP](https://integrativemodeling.org/),
 [MODELLER](https://salilab.org/modeller), and
 [PMI](https://github.com/salilab/pmi) in the modeling of the SEA complex using 188 DSS chemical cross-links and 23 composites from affinity purification.
