@@ -30,7 +30,7 @@ else:
 #get the keys from the first line
 for line in f.readlines():
     d=eval(line)
-    klist=d.keys()
+    klist=list(d.keys())
     #check if it is a stat2 file
     if "STAT2HEADER" in klist:
         import operator
@@ -42,8 +42,8 @@ for line in f.readlines():
                 del d[k]
         stat2_dict=d
         #get the list of keys sorted by value
-        kkeys=[k[0] for k in sorted(stat2_dict.iteritems(), key=operator.itemgetter(1))]
-        klist=[k[1] for k in sorted(stat2_dict.iteritems(), key=operator.itemgetter(1))]
+        kkeys=[k[0] for k in sorted(stat2_dict.items(), key=operator.itemgetter(1))]
+        klist=[k[1] for k in sorted(stat2_dict.items(), key=operator.itemgetter(1))]
         invstat2_dict={}
         for k in kkeys:
             invstat2_dict.update({stat2_dict[k]:k})
