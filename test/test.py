@@ -20,7 +20,8 @@ class Tests(unittest.TestCase):
 
     def _check_rmf_topology(self, fname):
         """Check the RMF file to make sure it matches the expected topology"""
-        p = subprocess.Popen(["rmf_show", fname], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["rmf_show", fname], stdout=subprocess.PIPE,
+                             universal_newlines=True)
         stdout, stderr = p.communicate()
         comps = re.findall('^     \+ "([^"]+)"', stdout, re.M)
         self.assertEqual(comps, ['SEA1', 'SEA2', 'SEA3', 'SEA4.1', 'SEA4.2',
