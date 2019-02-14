@@ -11,14 +11,14 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
-import IMP.pmi.restraints.stereochemistry
-import IMP.pmi.restraints.proteomics
-import IMP.pmi.restraints.crosslinking
-import IMP.pmi.restraints as restraints
-import IMP.pmi.representation as representation
-import IMP.pmi.tools as tools
-import IMP.pmi.output as output
-import IMP.pmi.samplers as samplers
+import IMP.pmi1.restraints.stereochemistry
+import IMP.pmi1.restraints.proteomics
+import IMP.pmi1.restraints.crosslinking
+import IMP.pmi1.restraints as restraints
+import IMP.pmi1.representation as representation
+import IMP.pmi1.tools as tools
+import IMP.pmi1.output as output
+import IMP.pmi1.samplers as samplers
 import random
 import sys
 import os
@@ -325,7 +325,7 @@ simo.set_floppy_bodies_max_trans(fbmaxtrans)
 # rigidify floppy bodies for clones
 #####################################################
 for rt in ['SEA4.2', 'SEA4.3', 'Seh1.2', 'Seh1.3']:
-    hs = IMP.pmi.tools.select_by_tuple(simo, rt)
+    hs = IMP.pmi1.tools.select_by_tuple(simo, rt)
     simo.remove_floppy_bodies(hs)
 
 #####################################################
@@ -376,7 +376,7 @@ partialscore2.append(simo)
 # Restraints setup
 # Excluded Volume restraint
 #####################################################
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution=res_ev)
+ev = IMP.pmi1.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution=res_ev)
 ev.add_to_model()
 outputobjects.append(ev)
 partialscore1.append(ev)
@@ -418,7 +418,7 @@ else:
         print("All composite restraints !! with weight =", weight)
 
 for key in crd:
-    cr=IMP.pmi.restraints.proteomics.ConnectivityRestraint(
+    cr=IMP.pmi1.restraints.proteomics.ConnectivityRestraint(
                                      simo, crd[key], resolution=res_compo)
     cr.add_to_model()
     cr.set_label(key)
@@ -436,7 +436,7 @@ print("Composite Restraint !! with weight =", weight)
 # sample format: "ssl1 ssl1 196 200"
 #####################################################
 res_XL = res_cry
-xl = IMP.pmi.restraints.crosslinking.ConnectivityCrossLinkMS(
+xl = IMP.pmi1.restraints.crosslinking.ConnectivityCrossLinkMS(
                     simo, inputs.XL_input, expdistance=17., resolution=res_XL)
 
 xl.add_to_model()
