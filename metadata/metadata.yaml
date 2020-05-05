@@ -1,5 +1,5 @@
 title: SEA Complex
-tags: [MODELLER, PMI, chemical crosslinks, affinity purification]
+tags: [MODELLER, PMI1, chemical crosslinks, affinity purification]
 pmid: 25073740
 prereqs: [modeller, python/numpy]
 test:
